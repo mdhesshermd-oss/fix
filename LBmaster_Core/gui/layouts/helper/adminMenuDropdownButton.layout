@@ -1,0 +1,33 @@
+PanelWidgetClass PanelWidget0 {
+ ignorepointer 1
+ size 1 27
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 1
+ {
+  ButtonWidgetClass btn {
+   size 1 25
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   priority 801
+   {
+    PanelWidgetClass btnColor {
+     ignorepointer 1
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     priority 802
+     style LB_Clean_outline
+    }
+   }
+  }
+ }
+}

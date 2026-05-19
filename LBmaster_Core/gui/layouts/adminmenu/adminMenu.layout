@@ -1,0 +1,131 @@
+PanelWidgetClass rootFrame {
+ visible 1
+ color 0.506 0.506 0.506 0.392
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ style rover_sim_colorable
+ {
+  PanelWidgetClass pageWidgets {
+   ignorepointer 1
+   position 0 5
+   size 1 1
+   halign center_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   scriptclass "LBGapHandler"
+   {
+    ScriptParamsClass {
+     gapHorizontal 10
+     gapVertical 85
+    }
+   }
+  }
+  WrapSpacerWidgetClass buttonWidgets {
+   clipchildren 0
+   ignorepointer 1
+   position 5 5
+   size 1 70
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   scriptclass "LBGapHandler"
+   {
+    ScriptParamsClass {
+     gapHorizontal 165
+    }
+   }
+  }
+  ButtonWidgetClass btn_close_admin {
+   position 5 5
+   size 150 25
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "#close"
+   {
+    PanelWidgetClass PanelWidget0 {
+     ignorepointer 1
+     color 1 0.196 0.196 1
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style LB_Clean_outline
+    }
+   }
+  }
+  MultilineTextWidgetClass txt_version {
+   ignorepointer 1
+   position 5 35
+   size 150 15
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   font "gui/fonts/sdf_MetronBook72"
+   "exact text" 1
+   "exact text size" 10
+   "size to text h" 0
+   "size to text v" 1
+   wrap 1
+  }
+  ButtonWidgetClass btn_save {
+   position 5 5
+   size 200 25
+   halign right_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   priority 600
+   text "#lb_save"
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     color 0 1 0 1
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     style LB_Clean_outline
+    }
+   }
+  }
+  WrapSpacerWidgetClass buttonWidgetsNew {
+   clipchildren 0
+   ignorepointer 1
+   position 5 5
+   size 1 70
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   scriptclass "LBGapHandler"
+   content_halign right
+   {
+    ScriptParamsClass {
+     gapHorizontal 165
+    }
+   }
+  }
+ }
+}

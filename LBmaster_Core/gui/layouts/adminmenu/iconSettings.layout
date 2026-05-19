@@ -1,0 +1,309 @@
+FrameWidgetClass rootFrame {
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ scriptclass "LBMenuPopulator"
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   size 900 200
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     size 200 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 0
+     {
+      TextWidgetClass TextWidget0 {
+       ignorepointer 1
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Error: "
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget1 {
+       ignorepointer 1
+       position 0 20
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Warning: "
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget2 {
+       ignorepointer 1
+       position 0 40
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Info: "
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget3 {
+       ignorepointer 1
+       position 0 60
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Applied: "
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget4 {
+       ignorepointer 1
+       position 0 80
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Abort: "
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget5 {
+       ignorepointer 1
+       position 0 100
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Building: "
+       "text halign" right
+       "text valign" center
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget2 {
+     ignorepointer 1
+     position 200 0
+     size 500 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 0
+     {
+      EditBoxWidgetClass edit_error {
+       size 1 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      EditBoxWidgetClass edit_warning {
+       position 0 20
+       size 1 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      EditBoxWidgetClass edit_info {
+       position 0 40
+       size 1 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      EditBoxWidgetClass edit_applied {
+       position 0 60
+       size 1 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      EditBoxWidgetClass edit_abort {
+       position 0 80
+       size 1 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      EditBoxWidgetClass edit_building {
+       position 0 100
+       size 1 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      ImageWidgetClass img_preview {
+       ignorepointer 1
+       size 80 80
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       mode additive
+       "src alpha" 1
+       "stretch mode" stretch_w_h
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget3 {
+     ignorepointer 1
+     size 200 1
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 0
+     {
+      ButtonWidgetClass btn_error_files {
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Files..."
+      }
+      ButtonWidgetClass btn_error_imgs {
+       size 100 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Imagesets..."
+      }
+      ButtonWidgetClass btn_warn_files {
+       position 0 20
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Files..."
+      }
+      ButtonWidgetClass btn_warn_imgs {
+       position 0 20
+       size 100 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Imagesets..."
+      }
+      ButtonWidgetClass btn_info_files {
+       position 0 40
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Files..."
+      }
+      ButtonWidgetClass btn_info_imgs {
+       position 0 40
+       size 100 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Imagesets..."
+      }
+      ButtonWidgetClass btn_applied_files {
+       position 0 60
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Files..."
+      }
+      ButtonWidgetClass btn_applied_imgs {
+       position 0 60
+       size 100 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Imagesets..."
+      }
+      ButtonWidgetClass btn_abort_files {
+       position 0 80
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Files..."
+      }
+      ButtonWidgetClass btn_abort_imgs {
+       position 0 80
+       size 100 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Imagesets..."
+      }
+      ButtonWidgetClass btn_building_files {
+       position 0 100
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Files..."
+      }
+      ButtonWidgetClass btn_building_imgs {
+       position 0 100
+       size 100 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Imagesets..."
+      }
+     }
+    }
+   }
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

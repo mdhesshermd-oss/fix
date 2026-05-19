@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UALBAdminMenuToggle" loc="lb_input_co_toggle_admin" />
+            <input name="UALBAdminMenuOpen" loc="lb_input_co_open_admin" />
+        </actions>
+		<sorting name="lb_admin_menu" loc="AdminTools">
+			<input name="UALBAdminMenuToggle" />
+			<input name="UALBAdminMenuOpen" />
+		</sorting>
+    </inputs>
+    <preset>
+		<input name="UALBAdminMenuToggle">
+            <btn name="kU" />
+        </input>
+		<input name="UALBAdminMenuOpen">
+            <btn name="kI" />
+        </input>
+    </preset>
+</modded_inputs>

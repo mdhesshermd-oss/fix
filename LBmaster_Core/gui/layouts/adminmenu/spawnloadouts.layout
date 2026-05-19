@@ -1,0 +1,1105 @@
+FrameWidgetClass rootFrame {
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ scriptclass "LBMenuPopulator"
+ {
+  PanelWidgetClass PanelWidget2 {
+   ignorepointer 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   {
+    PanelWidgetClass RightPanel {
+     ignorepointer 1
+     position 5 0
+     size 560 950
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    PanelWidgetClass panel_player {
+     ignorepointer 1
+     position 570 20
+     size 500 930
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      PlayerPreviewWidgetClass player_preview {
+       ignorepointer 0
+       size 400 600
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       scriptclass "LBItemPreviewHelper"
+       {
+        ScriptParamsClass {
+         allowVertical 0
+         allowHorizontal 1
+        }
+       }
+      }
+      ScrollWidgetClass HandsPanel {
+       visible 1
+       disabled 0
+       clipchildren 1
+       inheritalpha 0
+       ignorepointer 0
+       keepsafezone 0
+       color 0.196 0.196 0.196 0.392
+       size 1 350
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       fixaspect none
+       priority 100
+       scriptclass ""
+       "Scrollbar V" 1
+       {
+        FrameWidgetClass DropzoneX {
+         visible 0
+         clipchildren 0
+         ignorepointer 1
+         position 0 0
+         size 1 1
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+        }
+       }
+      }
+     }
+    }
+    TextWidgetClass TextWidget0 {
+     ignorepointer 1
+     position 0 40
+     size 400 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Preset List"
+     "text halign" center
+    }
+    TextListboxWidgetClass list_presets {
+     position 0 80
+     size 400 300
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     draggable 0
+     scriptclass ""
+     lines 15
+     "text outline size" 3
+     "text outline color" 0.255 0.255 0.255 1
+     "text shadow size" 4
+    }
+    TextWidgetClass TextWidget1 {
+     ignorepointer 1
+     position 0 400
+     size 100 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Name: "
+     "text halign" right
+    }
+    ButtonWidgetClass btn_add_preset {
+     position 0 380
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Add Preset"
+    }
+    ButtonWidgetClass btn_del_preset {
+     position 200 380
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Delete Preset"
+    }
+    EditBoxWidgetClass edit_preset_name {
+     position 100 400
+     size 300 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    CheckBoxWidgetClass chckbx_individual_chance {
+     position 0 420
+     size 240 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Individual Spawn Chance"
+    }
+    TextWidgetClass TextWidget2 {
+     ignorepointer 1
+     position 240 420
+     size 100 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Chance: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_preset_chance {
+     position 340 420
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    CheckBoxWidgetClass chckbx_root {
+     position 240 440
+     size 160 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Is Root Preset"
+    }
+    TextWidgetClass TextWidget3 {
+     ignorepointer 1
+     position 0 480
+     size 400 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Items / Subpresets spawned"
+     "text halign" center
+    }
+    TextListboxWidgetClass list_preset_items {
+     position 0 500
+     size 400 160
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     colums "Name;80%;Multi;20%;"
+     lines 8
+    }
+    ButtonWidgetClass btn_add_preset_item {
+     position 0 660
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Add"
+    }
+    ButtonWidgetClass btn_del_preset_item {
+     position 200 660
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Delete"
+    }
+    TextWidgetClass TextWidget4 {
+     ignorepointer 1
+     position 420 40
+     size 400 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Configured Items"
+     "text halign" center
+    }
+    TextListboxWidgetClass list_items {
+     position 420 80
+     size 400 300
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     draggable 0
+     scriptclass ""
+     lines 15
+    }
+    ButtonWidgetClass btn_add_item {
+     position 420 380
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Add Item"
+    }
+    ButtonWidgetClass btn_del_item {
+     position 620 380
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Delete Item"
+    }
+    TextWidgetClass TextWidget5 {
+     ignorepointer 1
+     position 420 400
+     size 100 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Name: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_item_name {
+     position 520 400
+     size 300 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    CheckBoxWidgetClass chckbx_individual_chance_item {
+     position 420 440
+     size 240 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Individual Spawn Chance"
+    }
+    TextWidgetClass TextWidget6 {
+     ignorepointer 1
+     position 660 440
+     size 100 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Chance: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_item_chance {
+     position 760 440
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    CheckBoxWidgetClass chckbx_hotbar {
+     position 660 460
+     size 160 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Add To Hotbar"
+    }
+    TextWidgetClass TextWidget7 {
+     ignorepointer 1
+     position 420 500
+     size 140 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Min Quantity: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_item_min {
+     position 560 500
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget8 {
+     ignorepointer 1
+     position 620 500
+     size 140 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Max Quantity: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_item_max {
+     position 760 500
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget9 {
+     ignorepointer 1
+     position 420 520
+     size 150 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Spawn in: "
+     "text halign" right
+    }
+    XComboBoxWidgetClass combo_spawn_in {
+     position 570 520
+     size 250 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget10 {
+     ignorepointer 1
+     position 420 540
+     size 400 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Items / Subpresets spawned"
+     "text halign" center
+    }
+    TextListboxWidgetClass list_item_preset_items {
+     position 420 560
+     size 400 100
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     colums "Name;80%;Multi;20%;"
+    }
+    ButtonWidgetClass btn_add_item_preset_item {
+     position 420 660
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Add"
+    }
+    ButtonWidgetClass btn_del_item_preset_item {
+     position 620 660
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Delete"
+    }
+    TextWidgetClass TextWidget11 {
+     ignorepointer 1
+     position 420 420
+     size 100 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Itemname: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_item_itemname {
+     position 520 420
+     size 300 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget12 {
+     ignorepointer 1
+     position 0 180
+     size 400 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Test Presets On Player"
+     "text halign" center
+    }
+    TextListboxWidgetClass list_test {
+     position 0 60
+     size 400 120
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     lines 6
+    }
+    ButtonWidgetClass btn_test_reload {
+     position 0 40
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Reload"
+    }
+    ButtonWidgetClass btn_test_clear {
+     position 200 40
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Clear List"
+    }
+    CheckBoxWidgetClass chckbx_clear_inv {
+     position 0 20
+     size 400 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Clear Inventory"
+    }
+    ItemPreviewWidgetClass item_preview {
+     ignorepointer 0
+     position 420 700
+     size 400 200
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scriptclass "LBItemPreviewHelper"
+     {
+      ScriptParamsClass {
+       allowVertical 1
+       allowHorizontal 1
+      }
+     }
+    }
+    CheckBoxWidgetClass chckbx_enable_item_preview {
+     position 420 900
+     size 400 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Enable Item Preview"
+     checked 1
+    }
+    PanelWidgetClass panel_item {
+     visible 0
+     ignorepointer 1
+     position 570 20
+     size 500 930
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      ItemPreviewWidgetClass preview_parent {
+       ignorepointer 0
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       scriptclass "LBItemPreviewHelper"
+       {
+        ScriptParamsClass {
+         allowVertical 1
+         allowHorizontal 1
+        }
+       }
+      }
+     }
+    }
+    PanelWidgetClass LeftPanel {
+     ignorepointer 1
+     position 5 0
+     size 560 950
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ButtonWidgetClass btn_container {
+     position 570 65
+     size 245 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Select Preview Container"
+    }
+    ButtonWidgetClass btn_player {
+     position 825 65
+     size 245 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Set Preview to Player"
+    }
+    PanelWidgetClass panel_preset_select_parent {
+     visible 0
+     ignorepointer 0
+     color 1 1 1 0.392
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     priority 600
+     style rover_sim_colorable
+     "no focus" 0
+     {
+      PanelWidgetClass panel_preset_select {
+       ignorepointer 0
+       color 0.392 0.392 0.392 1
+       position 0.1 0
+       size 600 800
+       valign center_ref
+       hexactpos 0
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style rover_sim_colorable
+       {
+        ButtonWidgetClass btn_preset {
+         position 0.002 40
+         size 0.33 20
+         hexactpos 0
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         text "Preset"
+        }
+        TextWidgetClass TextWidget13 {
+         ignorepointer 1
+         size 1 20
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         text "Select a preset, item, or use a default item config"
+         "text halign" center
+        }
+        ButtonWidgetClass btn_item {
+         position 0 40
+         size 0.33 20
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         text "Item"
+        }
+        XComboBoxWidgetClass combo_find_category {
+         position 0.002 20
+         size 0.661 20
+         hexactpos 0
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+        }
+        ButtonWidgetClass btn_defaultitem {
+         position 0.002 20
+         size 0.33 20
+         halign right_ref
+         hexactpos 0
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         text "Default Item"
+        }
+        ImageWidgetClass ImageWidget0 {
+         ignorepointer 1
+         position 0 60
+         size 20 20
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         image0 "LBmaster_Core/gui/icons/search.paa"
+         mode blend
+         "src alpha" 1
+         "stretch mode" stretch_w_h
+        }
+        EditBoxWidgetClass edit_search_popup {
+         position 0 60
+         size 1 20
+         halign right_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         scriptclass "LBGapHandler"
+         {
+          ScriptParamsClass {
+           gapHorizontal 20
+          }
+         }
+        }
+        TextListboxWidgetClass list_popup_select {
+         position 0 80
+         size 1 700
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         lines 35
+        }
+        ButtonWidgetClass btn_select_popup {
+         size 200 20
+         halign right_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "#lb_select"
+        }
+        ButtonWidgetClass btn_close_popup {
+         size 200 20
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "#cancel"
+        }
+       }
+      }
+     }
+    }
+    ButtonWidgetClass btn_stats_calc {
+     size 300 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Calculate Item Statistics"
+    }
+    PanelWidgetClass panel_statistics_parent {
+     visible 0
+     ignorepointer 0
+     color 1 1 1 0.392
+     position 0 0
+     size 1 1
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     priority 600
+     style rover_sim_colorable
+     "no focus" 0
+     {
+      PanelWidgetClass panel_statistics {
+       ignorepointer 0
+       color 0.392 0.392 0.392 1
+       size 800 800
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style rover_sim_colorable
+       {
+        TextListboxWidgetClass list_stats {
+         position 0 40
+         size 0.99 740
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         "title visible" 1
+         colums "Item;40%;Chance;20%;x in 10.000;20%;Quantity;20%;"
+         lines 36
+        }
+        TextWidgetClass TextWidget14 {
+         ignorepointer 1
+         size 1 40
+         halign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 1
+         text "Item Spawn Statistics"
+         "text halign" center
+         {
+          ImageWidgetClass img_info_stats {
+           ignorepointer 0
+           size 20 20
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           image0 "LBmaster_Core/gui/icons/info.paa"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+           {
+            PanelWidgetClass PanelWidget0 {
+             ignorepointer 1
+             size 1 1
+             halign center_ref
+             valign center_ref
+             hexactpos 1
+             vexactpos 1
+             hexactsize 0
+             vexactsize 0
+             style LB_Clean_outline
+            }
+           }
+          }
+         }
+        }
+        ButtonWidgetClass btn_close_stats {
+         size 200 20
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "#close"
+        }
+       }
+      }
+     }
+    }
+    CheckBoxWidgetClass chckbx_duplicates {
+     position 240 460
+     size 160 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Allow Duplicates"
+    }
+    TextWidgetClass TextWidget15 {
+     ignorepointer 1
+     position 0 440
+     size 180 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Minimum Spawns: "
+     "text halign" right
+    }
+    TextWidgetClass TextWidget16 {
+     ignorepointer 1
+     position 0 460
+     size 180 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Maximum Spawns: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_preset_min_spawns {
+     position 180 440
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    EditBoxWidgetClass edit_preset_max_spawns {
+     position 180 460
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    CheckBoxWidgetClass chckbx_duplicates_item {
+     position 660 480
+     size 160 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Allow Duplicates"
+    }
+    TextWidgetClass TextWidget17 {
+     ignorepointer 1
+     position 420 460
+     size 180 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Minimum Spawns: "
+     "text halign" right
+    }
+    TextWidgetClass TextWidget18 {
+     ignorepointer 1
+     position 420 480
+     size 180 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Maximum Spawns: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_preset_min_spawns_item {
+     position 600 460
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    EditBoxWidgetClass edit_preset_max_spawns_item {
+     position 600 480
+     size 60 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass ImageWidget1 {
+     ignorepointer 1
+     position 0 60
+     size 20 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     image0 "LBmaster_Core/gui/icons/search.paa"
+     mode additive
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    ImageWidgetClass ImageWidget2 {
+     ignorepointer 1
+     position 420 60
+     size 20 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     image0 "LBmaster_Core/gui/icons/search.paa"
+     mode additive
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    EditBoxWidgetClass edit_search_presets {
+     position 20 60
+     size 380 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    EditBoxWidgetClass edit_search_items {
+     position 440 60
+     size 380 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget20 {
+     ignorepointer 1
+     position 0 680
+     size 70 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Name: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_sub_preset_name {
+     position 70 680
+     size 330 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget21 {
+     ignorepointer 1
+     position 420 680
+     size 70 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Name: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_sub_item_name {
+     position 490 680
+     size 330 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget22 {
+     ignorepointer 1
+     size 150 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Category: "
+     "text halign" right
+    }
+    XComboBoxWidgetClass combo_categories {
+     position 150 0
+     size 250 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ButtonWidgetClass btn_add_category {
+     position 410 0
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Add"
+    }
+    ButtonWidgetClass btn_del_category {
+     position 410 20
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Delete"
+    }
+    TextWidgetClass TextWidget23 {
+     ignorepointer 1
+     position 0 20
+     size 150 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Name: "
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_category_name {
+     position 150 20
+     size 250 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+   }
+  }
+  PanelWidgetClass panel_errors {
+   visible 0
+   ignorepointer 1
+   color 0.392 0.392 0.392 1
+   position 0.2 0
+   size 800 500
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   priority 750
+   style rover_sim_colorable
+   {
+    TextListboxWidgetClass list_errors {
+     position 0 20
+     size 0.99 460
+     halign center_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     lines 23
+    }
+    TextWidgetClass TextWidget19 {
+     ignorepointer 1
+     size 1 20
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "You have errors in your Config!"
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass btn_close_errors {
+     size 200 20
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#close"
+    }
+   }
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

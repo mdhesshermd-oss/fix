@@ -1,0 +1,110 @@
+ImageSetClass {
+ Name "lb_loading"
+ RefSize 512 512
+ Textures {
+  ImageSetTextureClass {
+   mpix 0
+   path "LBmaster_Core/gui/images/loading.paa"
+  }
+ }
+ Images {
+  ImageSetDefClass 0 {
+   Name "0"
+   Pos 0 0
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 1 {
+   Name "1"
+   Pos 128 0
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 2 {
+   Name "2"
+   Pos 256 0
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 3 {
+   Name "3"
+   Pos 384 0
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 4 {
+   Name "4"
+   Pos 0 128
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 5 {
+   Name "5"
+   Pos 128 128
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 6 {
+   Name "6"
+   Pos 256 128
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 7 {
+   Name "7"
+   Pos 384 128
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 8 {
+   Name "8"
+   Pos 0 256
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 9 {
+   Name "9"
+   Pos 128 256
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 10 {
+   Name "10"
+   Pos 256 256
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 11 {
+   Name "11"
+   Pos 384 256
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 12 {
+   Name "12"
+   Pos 0 384
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 13 {
+   Name "13"
+   Pos 128 384
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 14 {
+   Name "14"
+   Pos 256 384
+   Size 128 128
+   Flags 0
+  }
+  ImageSetDefClass 15 {
+   Name "15"
+   Pos 384 384
+   Size 128 128
+   Flags 0
+  }
+ }
+ Groups {
+ }
+}

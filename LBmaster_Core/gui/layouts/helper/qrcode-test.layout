@@ -1,0 +1,33 @@
+PanelWidgetClass rootFrame {
+ size 500 540
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ scriptclass "LBMenuPopulator"
+ style blank
+ {
+  EditBoxWidgetClass edit_text {
+   size 1 20
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+  }
+  CanvasWidgetClass canvas {
+   ignorepointer 1
+   size 500 200
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

@@ -1,0 +1,313 @@
+FrameWidgetClass rootFrame {
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ scriptclass "LBMenuPopulator"
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   size 1010 490
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    TextWidgetClass TextWidget0 {
+     ignorepointer 1
+     size 500 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_admins"
+     "text halign" center
+     "text valign" center
+    }
+    TextListboxWidgetClass list_admins {
+     position 0 30
+     size 500 200
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "title visible" 1
+     colums "Comment;50%;Steamid;50%"
+     lines 10
+    }
+    TextWidgetClass TextWidget1 {
+     ignorepointer 1
+     position 0 250
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_required_ingame_name"
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_ingamename {
+     position 200 250
+     size 300 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget2 {
+     ignorepointer 1
+     position 0 270
+     size 150 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_comment"
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_comment {
+     position 150 270
+     size 350 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    CheckBoxWidgetClass chckbx_grant_all {
+     position 0 310
+     size 500 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_grant_all_permissions"
+    }
+    TextWidgetClass TextWidget3 {
+     ignorepointer 1
+     position 0 330
+     size 500 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_added_permission_groups"
+     "text halign" center
+    }
+    TextListboxWidgetClass list_admin_groups {
+     position 0 350
+     size 500 120
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     lines 6
+    }
+    ButtonWidgetClass btn_del {
+     position 0 0
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_remove"
+    }
+    ButtonWidgetClass btn_add {
+     position 300 0
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_add_selected"
+    }
+    TextWidgetClass TextWidget4 {
+     ignorepointer 1
+     size 500 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_all_permission_groups"
+     "text halign" center
+     "text valign" center
+    }
+    TextListboxWidgetClass list_permissions {
+     position 0 30
+     size 500 200
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     lines 10
+    }
+    ButtonWidgetClass btn_add_perm {
+     position 0 230
+     size 200 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_add_new"
+    }
+    ButtonWidgetClass btn_rem_perm {
+     position 300 230
+     size 200 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_remove"
+    }
+    TextWidgetClass TextWidget5 {
+     ignorepointer 1
+     position 0 270
+     size 500 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_granted_permissions"
+     "text halign" center
+    }
+    TextWidgetClass TextWidget6 {
+     ignorepointer 1
+     position 300 250
+     size 200 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_name"
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_perm_name {
+     position 0 250
+     size 300 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ScrollWidgetClass ScrollWidget0 {
+     ignorepointer 0
+     size 500 180
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "Scrollbar V" 1
+     {
+      WrapSpacerWidgetClass panel_permissions {
+       ignorepointer 1
+       size 1 10
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       Padding 0
+       Margin 0
+       "Size To Content V" 1
+      }
+     }
+    }
+    TextWidgetClass TextWidget7 {
+     ignorepointer 1
+     position 0 290
+     size 150 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_steamid"
+     "text halign" right
+    }
+    EditBoxWidgetClass edit_steamid {
+     position 150 290
+     size 300 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scriptclass "LBValidator_Steamid"
+     {
+      ScriptParamsClass {
+      }
+     }
+    }
+    ButtonWidgetClass btn_del_admin {
+     position 0 230
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_remove"
+    }
+    ButtonWidgetClass btn_add_admin {
+     position 300 230
+     size 200 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_cr_add_new"
+    }
+    ImageWidgetClass ImageWidget0 {
+     ignorepointer 1
+     position 480 180
+     size 20 20
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     image0 "LBmaster_Core/gui/icons/search.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    EditBoxWidgetClass edit_search {
+     position 0 180
+     size 480 20
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ButtonWidgetClass btn_find_steamid {
+     position 450 290
+     size 50 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "..."
+    }
+   }
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

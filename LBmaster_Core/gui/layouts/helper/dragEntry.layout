@@ -1,0 +1,29 @@
+TextWidgetClass text {
+ ignorepointer 1
+ position 0 0
+ size 48 20
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ priority 600
+ scriptclass "LBDragEvent"
+ text "Test Textt"
+ "size to text h" 1
+ "size to text v" 1
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.3922 0.3922 0.3922 0.3922
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   priority 599
+   style rover_sim_colorable
+  }
+ }
+}

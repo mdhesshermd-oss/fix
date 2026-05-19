@@ -1,0 +1,297 @@
+PanelWidgetClass rootFrame {
+ size 1300 590
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ style blank
+ {
+  PanelWidgetClass PanelWidget2 {
+   ignorepointer 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style blank
+   {
+    TextWidgetClass title {
+     ignorepointer 1
+     size 500 20
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_player_selector"
+     "text halign" center
+     "text valign" center
+    }
+    EditBoxWidgetClass edit_search {
+     position 250 30
+     size 500 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      PanelWidgetClass PanelWidget0 {
+       ignorepointer 1
+       position 0 0
+       size 1.1 1.1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    TextListboxWidgetClass list_players {
+     position 5 10
+     size 745 500
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "title visible" 1
+     colums "Name;60%;Steamid;40%"
+     lines 20
+    }
+    PanelWidgetClass panel_info {
+     ignorepointer 1
+     position 5 10
+     size 540 500
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      TextWidgetClass TextWidget1 {
+       ignorepointer 1
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "#lb_playername"
+       {
+        ButtonWidgetClass btn_copy_name {
+         size 20 20
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass ImageWidget0 {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{ABDE227D3625BBEA}LBmaster_Core/gui/icons/copy.paa"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+         }
+        }
+       }
+      }
+      TextWidgetClass txt_playername {
+       ignorepointer 1
+       position 0 20
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      TextWidgetClass TextWidget3 {
+       ignorepointer 1
+       position 0 45
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Steamid"
+       {
+        ButtonWidgetClass btn_copy_steamid {
+         size 20 20
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass ImageWidget1 {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{ABDE227D3625BBEA}LBmaster_Core/gui/icons/copy.paa"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+         }
+        }
+       }
+      }
+      TextWidgetClass txt_steamid {
+       ignorepointer 1
+       position 0 65
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      TextWidgetClass TextWidget5 {
+       ignorepointer 1
+       position 0 90
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "GUID"
+       {
+        ButtonWidgetClass btn_copy_guid {
+         size 20 20
+         halign right_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         {
+          ImageWidgetClass ImageWidget2 {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{ABDE227D3625BBEA}LBmaster_Core/gui/icons/copy.paa"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+         }
+        }
+       }
+      }
+      TextWidgetClass txt_guid {
+       ignorepointer 1
+       position 0 110
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      TextWidgetClass TextWidget6 {
+       ignorepointer 1
+       position 0 135
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "First Joined"
+      }
+      TextWidgetClass txt_first {
+       ignorepointer 1
+       position 0 155
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      TextWidgetClass TextWidget2 {
+       ignorepointer 1
+       position 0 200
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Last Online"
+      }
+      TextWidgetClass txt_last {
+       ignorepointer 1
+       position 0 220
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      TextWidgetClass txt_first_diff {
+       ignorepointer 1
+       position 0 175
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+      TextWidgetClass txt_last_diff {
+       ignorepointer 1
+       position 0 240
+       size 1 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+      }
+     }
+    }
+    TextWidgetClass TextWidget0 {
+     ignorepointer 1
+     position 150 30
+     size 100 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_search"
+     "text halign" right
+    }
+    CheckBoxWidgetClass chckbx_online {
+     position 5 30
+     size 145 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_online_only"
+    }
+   }
+  }
+ }
+}

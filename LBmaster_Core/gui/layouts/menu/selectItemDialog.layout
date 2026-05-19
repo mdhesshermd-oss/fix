@@ -1,0 +1,254 @@
+PanelWidgetClass rootFrame {
+ color 0.1529 0.1529 0.1529 0.9373
+ size 1000 590
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ style rover_sim_colorable
+ {
+  PanelWidgetClass PanelWidget2 {
+   ignorepointer 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style LB_Clean_outline
+   {
+    ButtonWidgetClass btn_select {
+     position 5 5
+     size 200 20
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_select"
+     {
+      PanelWidgetClass PanelWidget1 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    TextWidgetClass title {
+     ignorepointer 1
+     size 500 30
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_select_an_item"
+     "text halign" center
+     "text valign" center
+    }
+    EditBoxWidgetClass edit_search {
+     visible 1
+     disabled 0
+     clipchildren 1
+     inheritalpha 0
+     ignorepointer 0
+     ignoregloballv 0
+     keepsafezone 0
+     position 155 35
+     size 335 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      PanelWidgetClass PanelWidget0 {
+       ignorepointer 1
+       size 1.1 1.1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    TextListboxWidgetClass list_items {
+     position 5 60
+     size 500 500
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "title visible" 0
+     colums ""
+     lines 21
+     {
+      PanelWidgetClass PanelWidget6 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    ItemPreviewWidgetClass item_preview {
+     ignorepointer 1
+     position 5 80
+     size 485 480
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scriptclass "LBItemPreviewHelper"
+     {
+      ScriptParamsClass {
+       allowVertical 1
+       allowHorizontal 1
+      }
+     }
+    }
+    ButtonWidgetClass btn_close {
+     position 5 5
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#close"
+     {
+      PanelWidgetClass PanelWidget5 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    XComboBoxWidgetClass combo_category {
+     position 105 35
+     size 300 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget1 {
+     ignorepointer 1
+     position 5 35
+     size 100 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_category"
+     "text halign" right
+    }
+    ButtonWidgetClass btn_show_children {
+     position 210 5
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_find_children"
+     {
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    CheckBoxWidgetClass chckbx_spawnable {
+     position 5 35
+     size 145 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_spawnable_only"
+     checked 1
+    }
+    CheckBoxWidgetClass chckbx_enable_preview {
+     position 5 60
+     size 145 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_enable_preview"
+    }
+    ButtonWidgetClass btn_find_attachments {
+     position 415 5
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_find_attachments"
+     {
+      PanelWidgetClass PanelWidget4 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    ImageWidgetClass ImageWidget0 {
+     ignorepointer 1
+     position 490 35
+     size 20 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     image0 "LBmaster_Core/gui/icons/search.paa"
+     mode additive
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+ }
+}

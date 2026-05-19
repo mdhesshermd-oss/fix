@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UALBMHoverLoot" loc="Hover Loot" />
+        </actions>
+		<sorting name="lb_admin" loc="LBmaster">
+            <input name="UALBMHoverLoot" />
+		</sorting>
+    </inputs>
+    <preset>
+		<input name="UALBMHoverLoot">
+            <btn name="kH" />
+        </input>
+    </preset>
+</modded_inputs>

@@ -1,0 +1,88 @@
+PanelWidgetClass rootFrame {
+ color 0.3922 0.3922 0.3922 0.9804
+ position 20 20
+ size 400 120
+ halign right_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ style rover_sim_colorable
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   position 0 5
+   size 390 200
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    TextWidgetClass txt_item {
+     ignorepointer 1
+     size 1 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "Placing: Test_Object_ItemName"
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass TextWidget0 {
+     ignorepointer 1
+     position 0 30
+     size 1 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "Controls"
+     "text halign" center
+    }
+    TextWidgetClass txt_mouse {
+     ignorepointer 1
+     position 0 50
+     size 1 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "Mouse Wheel: Rotate Object"
+    }
+    TextWidgetClass txt_lcontrol {
+     ignorepointer 1
+     position 0 70
+     size 1 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "Left CTRL + Mouse Wheel: Move Object Up / Down"
+    }
+    TextWidgetClass txt_lalt_mouse {
+     ignorepointer 1
+     position 0 90
+     size 1 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "Left ALT: Toggle Align on Object / Surface"
+    }
+   }
+  }
+  PanelWidgetClass PanelWidget1 {
+   ignorepointer 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style LB_Clean_outline
+  }
+ }
+}

@@ -1,0 +1,134 @@
+FrameWidgetClass rootFrame {
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ scriptclass "LBMenuPopulator"
+ {
+  PanelWidgetClass PanelWidget0 {
+   size 1500 700
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   scriptclass ""
+   {
+    MapWidgetClass mapwidget {
+     size 0.5 1
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+    }
+    TextListboxWidgetClass list_items {
+     size 0.5 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     scriptclass "LBGapHandler"
+     lines 30
+     {
+      ScriptParamsClass {
+       gapVertical 80
+      }
+     }
+    }
+    TextWidgetClass txt_position {
+     ignorepointer 1
+     position 100 60
+     size 300 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    TextWidgetClass TextWidget0 {
+     ignorepointer 1
+     position 0 40
+     size 100 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_type"
+     "text halign" right
+    }
+    TextWidgetClass TextWidget1 {
+     ignorepointer 1
+     position 0 60
+     size 100 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_position"
+     "text halign" right
+    }
+    ButtonWidgetClass btn_tp {
+     position 0 0
+     size 100 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_tp_to"
+    }
+    XComboBoxWidgetClass combo_type {
+     position 100 40
+     size 300 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ItemPreviewWidgetClass preview {
+     ignorepointer 1
+     position 400 0
+     size 350 250
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    CheckBoxWidgetClass chckbx_preview {
+     position 200 0
+     size 200 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_co_enable_preview"
+    }
+    ButtonWidgetClass btn_delete {
+     position 0 20
+     size 100 20
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_delete"
+    }
+   }
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

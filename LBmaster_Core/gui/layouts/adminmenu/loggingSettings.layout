@@ -1,0 +1,222 @@
+FrameWidgetClass rootFrame {
+ size 1 1
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ scriptclass "LBMenuPopulator"
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   size 600 400
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    PanelWidgetClass panel_client {
+     ignorepointer 1
+     size 1 120
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     {
+      TextWidgetClass TextWidget0 {
+       ignorepointer 1
+       size 1 40
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Client Logging"
+       "text halign" center
+      }
+      TextWidgetClass TextWidget1 {
+       ignorepointer 1
+       position 0 40
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Loglevel: "
+       "text halign" right
+       "text valign" center
+      }
+      XComboBoxWidgetClass combo_loglevel_client {
+       position 0 40
+       size 500 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+      }
+      CheckBoxWidgetClass chckbx_full_time_client {
+       position 0 80
+       size 0.5 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Log Full timestamp"
+      }
+      CheckBoxWidgetClass chckbx_scriptlog_client {
+       position 0 80
+       size 0.5 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Write to Scriptlog"
+      }
+      TextWidgetClass TextWidget2 {
+       ignorepointer 1
+       position 0 60
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Folder: "
+       "text halign" right
+       "text valign" center
+      }
+      EditBoxWidgetClass edit_folder_client {
+       position 0 60
+       size 500 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+      }
+      ButtonWidgetClass btn_save_client {
+       size 200 20
+       halign right_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "#lb_save"
+      }
+     }
+    }
+    PanelWidgetClass panel_server {
+     ignorepointer 1
+     position 0 200
+     size 1 140
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     {
+      TextWidgetClass TextWidget3 {
+       ignorepointer 1
+       size 1 40
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Server Logging"
+       "text halign" center
+      }
+      TextWidgetClass TextWidget4 {
+       ignorepointer 1
+       position 0 40
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Loglevel: "
+       "text halign" right
+       "text valign" center
+      }
+      XComboBoxWidgetClass combo_loglevel_server {
+       position 0 40
+       size 500 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+      }
+      CheckBoxWidgetClass chckbx_full_time_server {
+       position 0 80
+       size 0.5 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Log Full timestamp"
+      }
+      CheckBoxWidgetClass chckbx_scriptlog_server {
+       position 0 80
+       size 0.5 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Write to Scriptlog"
+      }
+      TextWidgetClass TextWidget5 {
+       ignorepointer 1
+       position 0 60
+       size 100 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Folder: "
+       "text halign" right
+       "text valign" center
+      }
+      EditBoxWidgetClass edit_folder_server {
+       position 0 60
+       size 500 20
+       halign right_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+      }
+      ButtonWidgetClass btn_save_server {
+       size 200 20
+       halign right_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "#lb_save"
+      }
+      CheckBoxWidgetClass chckbx_send_critical_server {
+       position 0 100
+       size 0.5 20
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 1
+       text "Send critical logs entries"
+      }
+     }
+    }
+   }
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

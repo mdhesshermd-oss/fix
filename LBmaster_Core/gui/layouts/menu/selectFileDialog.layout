@@ -1,0 +1,155 @@
+PanelWidgetClass rootFrame {
+ color 0.1529 0.1529 0.1529 0.9373
+ size 1000 600
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ scriptclass "LBMenuPopulator"
+ style rover_sim_colorable
+ {
+  PanelWidgetClass PanelWidget2 {
+   ignorepointer 1
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style LB_Clean_outline
+   {
+    ButtonWidgetClass btn_select {
+     position 5 5
+     size 200 30
+     halign right_ref
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#lb_select"
+    }
+    TextWidgetClass title {
+     ignorepointer 1
+     size 1 30
+     halign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "#lb_file_selector"
+     "text halign" center
+     "text valign" center
+    }
+    EditBoxWidgetClass edit_current_path {
+     position 5 30
+     size 0.8 20
+     halign right_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+    }
+    TextListboxWidgetClass list_files {
+     position 5 60
+     size 700 500
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "title visible" 1
+     colums "Dir;10%;Name;90%;"
+     lines 20
+    }
+    ButtonWidgetClass btn_home {
+     position 5 30
+     size 50 30
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      ImageWidgetClass ImageWidget0 {
+       ignorepointer 1
+       size 25 25
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       imageTexture "{22F6AB28CD82C3C4}LBmaster_Core/gui/icons/home.paa"
+       mode additive
+       "src alpha" 1
+       "stretch mode" stretch_w_h
+      }
+      PanelWidgetClass PanelWidget0 {
+       ignorepointer 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 0
+       vexactsize 0
+       style LB_Clean_outline
+      }
+     }
+    }
+    ImageWidgetClass img_preview {
+     ignorepointer 1
+     position 5 10
+     size 285 500
+     halign right_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    ButtonWidgetClass btn_back {
+     position 60 30
+     size 50 30
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "<-"
+    }
+    ButtonWidgetClass btn_close {
+     position 5 5
+     size 200 30
+     valign bottom_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "#close"
+    }
+    ImageWidgetClass ImageWidget1 {
+     ignorepointer 1
+     position 175 30
+     size 20 20
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     image0 "LBmaster_Core/gui/icons/search.paa"
+     mode additive
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

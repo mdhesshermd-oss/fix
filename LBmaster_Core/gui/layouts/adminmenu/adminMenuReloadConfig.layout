@@ -1,0 +1,99 @@
+FrameWidgetClass rootFrame {
+ size 400 450
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ scriptclass "LBMenuPopulator"
+ {
+  TextWidgetClass TextWidget0 {
+   ignorepointer 1
+   position 0 5
+   size 1 20
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   text "#lb_reload_from_disk"
+   "text halign" center
+   "text valign" center
+  }
+  TextListboxWidgetClass list_configs {
+   position 0 50
+   size 1 340
+   halign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   lines 15
+  }
+  ButtonWidgetClass btn_reload_selected {
+   position 0 40
+   size 1 20
+   halign center_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   text "#lb_reload_selected_config"
+  }
+  ButtonWidgetClass btn_reload_mod {
+   position 0 20
+   size 1 20
+   halign center_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   text "#lb_reload_selected_mod"
+  }
+  ButtonWidgetClass btn_reload_all {
+   size 1 20
+   halign center_ref
+   valign bottom_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   text "#lb_reload_all"
+  }
+  EditBoxWidgetClass edit_search {
+   position 0 30
+   size 1 20
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 1
+   scriptclass "LBGapHandler"
+   {
+    ScriptParamsClass {
+     gapHorizontal 20
+    }
+   }
+  }
+  ImageWidgetClass ImageWidget0 {
+   ignorepointer 1
+   position 0 30
+   size 20 20
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "LBmaster_Core/gui/icons/search.paa"
+   mode additive
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+ }
+ {
+  ScriptParamsClass {
+  }
+ }
+}

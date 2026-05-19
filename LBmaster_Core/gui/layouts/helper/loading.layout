@@ -1,0 +1,11 @@
+ImageWidgetClass rootFrame {
+ size 20 20
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ image0 "set:lb_loading image:0"
+ mode blend
+ "src alpha" 1
+ "stretch mode" stretch_w_h
+}

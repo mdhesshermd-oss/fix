@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class SHADOWFOX_CarLock
 	{
-		units[] = {"SHADOWFOX_CarLock"};
+		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.1;
 		requiredAddons[] = {"DZ_Data", "DZ_Scripts", "DZ_Vehicles_Wheeled", "JM_CF_Scripts"};
@@ -47,35 +47,6 @@ class CfgMods
 	};
 };
 
-class CfgVehicles
-{
-	class Inventory_Base;
-	class SHADOWFOX_CarLock: Inventory_Base
-	{
-		scope = 2;
-		displayName = "$STR_shadowfox_carlock_item_name";
-		descriptionShort = "$STR_shadowfox_carlock_item_desc";
-		model = "SHADOWFOX_CarLock/Data/CarLock.p3d";
-		rotationFlags = 17;
-		weight = 200;
-		itemSize[] = {2, 2};
-		itemBehaviour = 1;
-		hiddenSelections[] = {"camo"};
-		hiddenSelectionsTextures[] = {"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"};
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health
-				{
-					hitpoints = 100;
-					healthLevels[] = {{1.0,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.7,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.5,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.3,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.0,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}}};
-				};
-			};
-		};
-	};
-};
-
 class CfgSoundSets
 {
 	class SHADOWFOX_CarAlarm_SoundSet
@@ -111,5 +82,22 @@ class CfgSoundShaders
 		samples[] = {{"SHADOWFOX_CarLock/Data/Sounds/carunlock", 1}};
 		volume = 1.0;
 		range = 30;
+	};
+};
+
+class PrivacySettings
+{
+	class SHADOWFOX_CarLock
+	{
+		class Inputs
+		{
+			class SHADOWFOX_CarLockToggle
+			{
+				key = "UASHADOWFOX_CarLockToggle";
+				name = "SHADOWFOX CarLock Toggle";
+				description = "Toggle Vehicle Lock";
+				default_key = "KC_U";
+			};
+		};
 	};
 };

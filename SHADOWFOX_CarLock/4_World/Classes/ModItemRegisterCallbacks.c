@@ -6,7 +6,6 @@ modded class ModItemRegisterCallbacks
     override void RegisterOneHanded(DayZPlayerType pType, DayZPlayerItemBehaviorCfg pBehavior)
     {
         super.RegisterOneHanded(pType, pBehavior);
-        pType.AddItemInHandsProfileIK("SHADOWFOX_CarLock", "dz/anims/workfbp/ik/presents/presents.asi", pBehavior);
     }
 };
 

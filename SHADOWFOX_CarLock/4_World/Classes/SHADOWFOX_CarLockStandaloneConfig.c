@@ -17,7 +17,6 @@ class SHADOWFOX_CarLockStandaloneConfig
         LockPickTools = new array<string>();
         // Defaults
         LockPickTools.Insert("Lockpick");
-        LockPickTools.Insert("Screwdriver");
     }
 
     static ref SHADOWFOX_CarLockStandaloneConfig Load()

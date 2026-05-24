@@ -35,7 +35,7 @@ class ActionAttachCarLock : ActionContinuousBase
         CarScript car = SHADOWFOX_CarLockTargetHelper.GetTargetCar(target);
         if (car && car.m_SF_OwnerId == -1)
         {
-            return true;
+            if (item && item.IsKindOf("CodeLock")) return true;
         }
         return false;
     }
@@ -53,7 +53,7 @@ class ActionAttachCarLock : ActionContinuousBase
 
             if (action_data.m_MainItem)
             {
-                SHADOWFOX_CarLockNewLogger.Get().LogInfo("Deleting lock item from hands");
+                SHADOWFOX_CarLockNewLogger.Get().LogInfo("Deleting CodeLock item from hands");
                 action_data.m_MainItem.Delete();
             }
             SHADOWFOX_CarLockNewLogger.Get().LogInfo("Lock attachment sequence complete");

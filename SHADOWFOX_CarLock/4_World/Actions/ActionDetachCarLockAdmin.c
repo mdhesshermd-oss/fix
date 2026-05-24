@@ -27,7 +27,7 @@ class ActionDetachCarLockAdmin : ActionContinuousBase
 
     override string GetText()
     {
-        return "Remove Lock (Admin)";
+        return "#STR_shadowfox_carlock_detach_admin";
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
@@ -45,13 +45,13 @@ class ActionDetachCarLockAdmin : ActionContinuousBase
         CarScript car = SHADOWFOX_CarLockTargetHelper.GetTargetCar(action_data.m_Target);
         if (car)
         {
-            SHADOWFOX_CarLockHelpers.CreateInInventory(action_data.m_Player, "SHADOWFOX_CarLock");
+            SHADOWFOX_CarLockHelpers.CreateInInventory(action_data.m_Player, "CodeLock");
             car.m_SF_OwnerId = -1;
             car.m_SF_Password = -1;
             car.m_SF_OwnerName = "";
             car.m_SF_OwnerSteamId = "";
             car.SetSF_CarLock(false);
-            SHADOWFOX_CarLockNewLogger.Get().LogInfo("Lock removed by Admin: " + action_data.m_Player.GetIdentity().GetName());
+            SHADOWFOX_CarLockNewLogger.Get().LogInfo("Lock removed by Admin (CodeLock given): " + action_data.m_Player.GetIdentity().GetName());
         }
     }
 };

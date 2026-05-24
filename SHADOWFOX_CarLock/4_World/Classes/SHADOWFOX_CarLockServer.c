@@ -68,9 +68,9 @@ class SHADOWFOX_CarLockServer
                 SHADOWFOX_CarLockNewLogger.Get().LogInfo("Password set: " + sender.GetName() + " for " + car.GetDisplayName());
 
                 EntityAI itemInHands = player.GetHumanInventory().GetEntityInHands();
-                if (itemInHands && itemInHands.IsKindOf("SHADOWFOX_CarLock"))
+                if (itemInHands && itemInHands.IsKindOf("CodeLock"))
                 {
-                    Print("[SHADOWFOX_CarLock] Server: Deleting lock from player hands");
+                    Print("[SHADOWFOX_CarLock] Server: Deleting CodeLock from player hands");
                     itemInHands.Delete();
                 }
 

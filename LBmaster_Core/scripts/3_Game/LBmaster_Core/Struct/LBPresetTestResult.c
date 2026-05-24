@@ -1,8 +1,0 @@
-enum LBPresetTestResult {
-
-	OK,
-	INFINITE_LOOP,
-	POSSIBLE_DUPLICATE,
-	MISSING_ITEMS
-
-}

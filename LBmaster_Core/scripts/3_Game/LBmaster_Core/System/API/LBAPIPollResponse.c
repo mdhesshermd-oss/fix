@@ -1,5 +1,0 @@
-class LBAPIPollResponse {
-
-	string route;
-
-}

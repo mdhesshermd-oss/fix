@@ -1,1 +1,0 @@
-class LBAPIParserKey : LBAPIParser<LBKeyValue> {}

@@ -1,6 +1,0 @@
-enum LBConfigType {
-
-	CONFIG,
-	DATA,
-
-}

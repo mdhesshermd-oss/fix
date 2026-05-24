@@ -1,1 +1,0 @@
-class LB_Webhook_Empty {}

@@ -15,11 +15,19 @@ class SHADOWFOX_CarLockMenu extends UIScriptedMenu
     void SHADOWFOX_CarLockMenu(CarScript car)
     {
         m_Car = car;
+        Print("[SHADOWFOX_CarLock] UI: Constructor called for car: " + car.GetDisplayName());
     }
 
     override Widget Init()
     {
+        Print("[SHADOWFOX_CarLock] UI: Init called");
         layoutRoot = GetGame().GetWorkspace().CreateWidgets("SHADOWFOX_CarLock/Data/GUI/carlockui.layout");
+        if (!layoutRoot)
+        {
+            Print("[SHADOWFOX_CarLock] UI ERROR: Could not find layout file: SHADOWFOX_CarLock/Data/GUI/carlockui.layout");
+            return null;
+        }
+
         m_BttnOK = ButtonWidget.Cast(layoutRoot.FindAnyWidget("BttnOK"));
         m_BttnCancel = ButtonWidget.Cast(layoutRoot.FindAnyWidget("BttnCancel"));
         m_PasswordInput = EditBoxWidget.Cast(layoutRoot.FindAnyWidget("PasswordInput"));
@@ -38,12 +46,14 @@ class SHADOWFOX_CarLockMenu extends UIScriptedMenu
         m_BttnDelete = ButtonWidget.Cast(layoutRoot.FindAnyWidget("BttnDelete"));
 
         layoutRoot.Show(false);
+        Print("[SHADOWFOX_CarLock] UI: Init successful");
         return layoutRoot;
     }
 
     override void OnShow()
     {
         super.OnShow();
+        Print("[SHADOWFOX_CarLock] UI: OnShow");
         PPEffects.SetBlurMenu(0.5);
         GetGame().GetInput().ChangeGameFocus(1);
         GetGame().GetUIManager().ShowUICursor(true);
@@ -54,6 +64,7 @@ class SHADOWFOX_CarLockMenu extends UIScriptedMenu
     override void OnHide()
     {
         super.OnHide();
+        Print("[SHADOWFOX_CarLock] UI: OnHide");
         PPEffects.SetBlurMenu(0);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetUIManager().ShowUICursor(false);
@@ -108,6 +119,7 @@ class SHADOWFOX_CarLockMenu extends UIScriptedMenu
     void HandlePassword()
     {
         string pwd = m_PasswordInput.GetText();
+        Print("[SHADOWFOX_CarLock] UI: Handling password input: " + pwd);
         if (pwd.Length() != 4) { m_TextOutPut.SetText("Must be 4 digits!"); return; }
 
         int val = pwd.ToInt();

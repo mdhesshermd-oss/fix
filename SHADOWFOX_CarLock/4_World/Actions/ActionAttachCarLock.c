@@ -27,7 +27,7 @@ class ActionAttachCarLock : ActionContinuousBase
 
     override string GetText()
     {
-        return "Install Lock";
+        return "#STR_shadowfox_carlock_install_lock";
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
@@ -45,13 +45,22 @@ class ActionAttachCarLock : ActionContinuousBase
         CarScript car = SHADOWFOX_CarLockTargetHelper.GetTargetCar(action_data.m_Target);
         if (car)
         {
+            SHADOWFOX_CarLockNewLogger.Get().LogInfo("OnFinishProgressServer: Attaching lock to " + car.GetDisplayName());
             car.m_SF_OwnerId = action_data.m_Player.m_SF_LowUid;
             car.m_SF_OwnerName = action_data.m_Player.GetIdentity().GetName();
             car.m_SF_OwnerSteamId = action_data.m_Player.GetIdentity().GetPlainId();
             car.SetSF_CarLock(false);
 
-            action_data.m_MainItem.Delete();
-            SHADOWFOX_CarLockNewLogger.Get().LogInfo("Lock attached to " + car.GetDisplayName() + " by " + car.m_SF_OwnerName);
+            if (action_data.m_MainItem)
+            {
+                SHADOWFOX_CarLockNewLogger.Get().LogInfo("Deleting lock item from hands");
+                action_data.m_MainItem.Delete();
+            }
+            SHADOWFOX_CarLockNewLogger.Get().LogInfo("Lock attachment sequence complete");
+        }
+        else
+        {
+            SHADOWFOX_CarLockNewLogger.Get().LogError("OnFinishProgressServer: Target car not found!");
         }
     }
 };

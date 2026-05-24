@@ -12,6 +12,7 @@ modded class CarScript
 
     void CarScript()
     {
+        Print("[SHADOWFOX_CarLock] CarScript constructor called for " + GetDisplayName());
         RegisterNetSyncVariableBool("m_SF_IsLocked");
         RegisterNetSyncVariableInt("m_SF_OwnerId");
         RegisterNetSyncVariableInt("m_SF_Password");
@@ -28,7 +29,7 @@ modded class CarScript
     {
         if (m_SF_OwnerId != -1 && m_SF_Password != -1)
         {
-            SHADOWFOX_CarLockNewLogger.Get().LogInfo("CarLock Initialized: " + GetDisplayName() + " Owner: " + m_SF_OwnerName + " (" + m_SF_OwnerSteamId + ") at " + GetPosition().ToString());
+            Print("[SHADOWFOX_CarLock] CarLock Logic Initialized for vehicle: " + GetDisplayName());
         }
     }
 
@@ -37,13 +38,14 @@ modded class CarScript
         super.EEDelete(parent);
         if (GetGame().IsServer() && m_SF_OwnerId != -1)
         {
-            SHADOWFOX_CarLockNewLogger.Get().LogInfo("CarLock Deleted: " + GetDisplayName() + " Owner: " + m_SF_OwnerName + " at " + GetPosition().ToString());
+            Print("[SHADOWFOX_CarLock] CarLock Deleted for vehicle: " + GetDisplayName());
         }
     }
 
     override void OnVariablesSynchronized()
     {
         super.OnVariablesSynchronized();
+        Print("[SHADOWFOX_CarLock] Variables Synchronized. Sound to play: " + m_SF_SoundToPlay);
         if (m_SF_SoundToPlay == 1) PlaySF_LockSound();
         else if (m_SF_SoundToPlay == 2) PlaySF_UnlockSound();
         else if (m_SF_SoundToPlay == 3) PlaySF_AlarmSound();
@@ -58,6 +60,7 @@ modded class CarScript
 
     void SetSF_CarLock(bool locked)
     {
+        Print("[SHADOWFOX_CarLock] Setting lock state to: " + locked);
         m_SF_IsLocked = locked;
         if (GetGame().IsServer())
         {

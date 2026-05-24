@@ -5,18 +5,22 @@ class SHADOWFOX_CarLockHelpers
 {
     static bool CreateInInventory(PlayerBase player, string classname, int quantity = 1)
     {
+        Print("[SHADOWFOX_CarLock] Attempting to create item: " + classname);
         if (!player || classname == "" || quantity <= 0) return false;
         EntityAI entity = player.GetInventory().CreateInInventory(classname);
         if (!entity)
         {
+            Print("[SHADOWFOX_CarLock] Could not create in inventory, creating at player position");
             entity = EntityAI.Cast(GetGame().CreateObject(classname, player.GetPosition(), false, true));
         }
         if (entity)
         {
+            Print("[SHADOWFOX_CarLock] Item created successfully");
             ItemBase item = ItemBase.Cast(entity);
             if (item) item.SetQuantity(quantity);
             return true;
         }
+        Print("[SHADOWFOX_CarLock] Failed to create item: " + classname);
         return false;
     }
 
@@ -80,7 +84,19 @@ class SHADOWFOX_CarLockHelpers
         int year, month, day, hour, minute, second;
         GetYearMonthDay(year, month, day);
         GetHourMinuteSecond(hour, minute, second);
-        return year.ToString() + "-" + month.ToStringLen(2) + "-" + day.ToStringLen(2) + " " + hour.ToStringLen(2) + ":" + minute.ToStringLen(2) + ":" + second.ToStringLen(2);
+
+        string s_month = month.ToString();
+        if (month < 10) s_month = "0" + s_month;
+        string s_day = day.ToString();
+        if (day < 10) s_day = "0" + s_day;
+        string s_hour = hour.ToString();
+        if (hour < 10) s_hour = "0" + s_hour;
+        string s_min = minute.ToString();
+        if (minute < 10) s_min = "0" + s_min;
+        string s_sec = second.ToString();
+        if (second < 10) s_sec = "0" + s_sec;
+
+        return year.ToString() + "-" + s_month + "-" + s_day + " " + s_hour + ":" + s_min + ":" + s_sec;
     }
 };
 

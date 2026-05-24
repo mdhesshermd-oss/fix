@@ -49,6 +49,7 @@ class SHADOWFOX_CarLockCore
     {
         if (GetGame().IsServer())
         {
+            SHADOWFOX_CarLockNewLogger.Get().LogInfo("Registering RPCs");
             GetRPCManager().AddRPC("SHADOWFOX_CarLock", "SHADOWFOX_CarLockRequest", m_CarLockServer, SingleplayerExecutionType.Client);
             GetRPCManager().AddRPC("SHADOWFOX_CarLock", "SHADOWFOX_CarLockPasswordRequest", m_CarLockServer, SingleplayerExecutionType.Client);
         }

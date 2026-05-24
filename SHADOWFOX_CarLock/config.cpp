@@ -62,6 +62,17 @@ class CfgVehicles
 		itemBehaviour = 1;
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] = {"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 100;
+					healthLevels[] = {{1.0,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.7,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.5,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.3,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}},{0.0,{"SHADOWFOX_CarLock/Data/Textures/codelock_co.paa"}}};
+				};
+			};
+		};
 	};
 };
 
@@ -100,22 +111,5 @@ class CfgSoundShaders
 		samples[] = {{"SHADOWFOX_CarLock/Data/Sounds/carunlock", 1}};
 		volume = 1.0;
 		range = 30;
-	};
-};
-
-class PrivacySettings
-{
-	class SHADOWFOX_CarLock
-	{
-		class Inputs
-		{
-			class SHADOWFOX_CarLockToggle
-			{
-				key = "UASHADOWFOX_CarLockToggle";
-				name = "SHADOWFOX CarLock Toggle";
-				description = "Toggle Vehicle Lock";
-				default_key = "KC_U";
-			};
-		};
 	};
 };

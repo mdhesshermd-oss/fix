@@ -127,6 +127,7 @@ def run_scraper_menu():
         return
         
     selected_token = tokens[token_choice]["token"]
+    selected_proxy = tokens[token_choice].get("proxy")
     
     target = input("Введите инвайт-ссылку на сервер (например, https://discord.gg/abc) или ID сервера: ").strip()
     if not target:
@@ -134,7 +135,7 @@ def run_scraper_menu():
         return
         
     print("\nЗапуск сбора участников... Пожалуйста, подождите...")
-    success, err = run_scraper(selected_token, target)
+    success, err = run_scraper(selected_token, target, proxy=selected_proxy)
     if success:
         print("\n[УСПЕХ] Участники сервера успешно собраны и сохранены в базу данных.")
     else:

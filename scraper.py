@@ -128,9 +128,9 @@ class ScrapeClient(discord.Client):
             
         await self.close()
 
-def run_scraper(token: str, target: str):
+def run_scraper(token: str, target: str, proxy: str = None):
     """Runs the scraper for a single token and target server."""
-    client = ScrapeClient(target_input=target)
+    client = ScrapeClient(target_input=target, proxy=proxy)
     try:
         # Use asyncio to run the client
         asyncio.run(client.start(token))

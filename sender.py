@@ -19,11 +19,16 @@ ai_lock = asyncio.Lock()
 
 class MultiTokenSender(discord.Client):
     def __init__(self, token_info, *args, **kwargs):
+        # Pass proxy to discord.Client via proxy keyword if supported
+        proxy_url = token_info.get("proxy")
+        if proxy_url:
+            kwargs["proxy"] = proxy_url
+
         super().__init__(*args, **kwargs)
         self.token_id = token_info["id"]
         self.token_str = token_info["token"]
         self.username = token_info["username"]
-        self.proxy = token_info.get("proxy")
+        self.proxy = proxy_url
         self.friend_loop_task = None
         self.is_running = True
 
@@ -212,9 +217,8 @@ async def start_all_senders():
         # We define a startup wrapper to handle invalid tokens without crashing everything
         async def run_client(cl=client):
             try:
-                # Use proxy if available
-                proxy_url = cl.proxy if cl.proxy else None
-                await cl.start(cl.token_str, proxy=proxy_url)
+                # Proxy is now handled in __init__ for discord.py-self
+                await cl.start(cl.token_str)
             except discord.LoginFailure:
                 print(f"[Ошибка] Неверный токен для аккаунта ID {cl.token_id} (Username: {cl.username}). Токен помечен как недействительный.")
                 update_token_status(cl.token_id, "invalid")

@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+sender_data.db
+tokens.txt
+config.json

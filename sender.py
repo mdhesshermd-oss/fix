@@ -111,8 +111,9 @@ class MultiTokenSender(discord.Client):
         except discord.HTTPException as e:
             err_msg = str(e).lower()
             if "captcha" in err_msg or e.status == 403:
-                print(f"[КРИТ] Капча при отправке ЛС {user.name}. ПАУЗА 1 ЧАС.")
-                await asyncio.sleep(3600)
+                print(f"[КРИТ] Капча при отправке ЛС {user.name}. ПАУЗА 5 МИНУТ и ожидание решения.")
+                # Интеграция с визуальной автоматизацией (если запущено через mass_sender.py)
+                await asyncio.sleep(300)
             else:
                 print(f"[ОШИБКА] Сбой Discord API при ЛС {user.name}: {e}")
             update_message_status(str(user.id), "failed")
@@ -149,9 +150,9 @@ class MultiTokenSender(discord.Client):
                     update_friend_status(str(u['user_id']), "none")
                     await asyncio.sleep(600)
                 elif "captcha" in err_msg or e.status == 403 or "unauthorized" in err_msg:
-                    print(f"[КРИТ] Обнаружена капча или блокировка (403). ПАУЗА 1 ЧАС для безопасности.")
+                    print(f"[КРИТ] Обнаружена капча или блокировка (403). ПАУЗА 5 МИНУТ и попытка решения.")
                     update_friend_status(str(u['user_id']), "none")
-                    await asyncio.sleep(3600) # Safety stop for 1 hour
+                    await asyncio.sleep(300) # Wait for GUI automation to solve
                 else:
                     print(f"[ОШИБКА] Ошибка API Discord: {e}")
                     update_friend_status(str(u['user_id']), "failed")

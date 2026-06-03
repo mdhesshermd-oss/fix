@@ -118,87 +118,49 @@ def paraphrase_free(base_message: str) -> str:
 
 def paraphrase_message(base_message: str) -> str:
     """
-    Paraphrases the message depending on the selected engine in config.json.
-    Can use 'gemini' (needs key) or 'free' (unlimited, no key needed).
+    Paraphrases the message using multiple LLM fallbacks for maximum reliability.
+    Strictly keeps IP/Discord parameters unchanged.
     """
     config = load_config()
-    engine = config.get("ai_engine", "free")
     
-    if engine == "gemini":
+    # 1. First Attempt: Google Gemini (if configured)
+    if config.get("ai_engine") == "gemini":
         api_key = config.get("gemini_api_key", "")
-        if not api_key or api_key == "YOUR_GEMINI_API_KEY_HERE":
-            print("[AI Warning] Ключ Gemini API не настроен. Переключаемся на бесплатные модели...")
-            return paraphrase_free(base_message)
-            
-        try:
-            genai.configure(api_key=api_key)
-            
-            # Try different models in case one is not supported or missing in the API version/region
-            gemini_models = ["gemini-pro", "gemini-1.5-flash", "gemini-1.5-pro"]
-            model = None
-            for model_name in gemini_models:
-                try:
-                    model = genai.GenerativeModel(model_name)
-                    # Quick check if it is supported
-                    model.generate_content("hi")
-                    print(f"[AI] Успешно инициализирована официальная модель Gemini: {model_name}")
-                    break
-                except Exception:
-                    model = None
-                    continue
-                    
-            if not model:
-                print("[AI Warning] Не удалось запустить ни одну из моделей Gemini. Переключаемся на бесплатные модели...")
-                return paraphrase_free(base_message)
-            
-            import random
-            tones = [
-                "дружелюбный и разговорный",
-                "вежливый и профессиональный",
-                "воодушевленный и открытый",
-                "неформальный и приветливый",
-                "простой и естественный"
-            ]
-            selected_tone = random.choice(tones)
-            random_salt = random.randint(1000, 99999)
+        if api_key and api_key != "YOUR_GEMINI_API_KEY_HERE":
+            try:
+                genai.configure(api_key=api_key)
+                # Try multiple Gemini versions
+                for model_name in ["gemini-1.5-flash", "gemini-pro"]:
+                    try:
+                        model = genai.GenerativeModel(model_name)
 
-            prompt = (
-                "Ты — профессиональный копирайтер и редактор игровых текстов. Твоя задача — немного изменить/перефразировать предложенный текст, "
-                "чтобы он стал уникальным для обхода спам-фильтров Discord, но при этом КРАЙНЕ строго соблюдай следующие правила:\n\n"
-                "1. КРАЙНЕ ВАЖНО: Ни в коем случае не меняй ключевые игровые термины, цифры и названия!\n"
-                "   - Слово \"клан\" (clans) НЕЛЬЗЯ заменять на \"клон\" (clones) или другие слова! Всегда оставляй только \"клан\".\n"
-                "   - Название игры (DayZ) и IP-адрес (212.22.85.57:2302) должны остаться ровно такими же.\n"
-                "   - Названия машин (BMW M5/X5, Mercedes AMG G63, Hummer, Dodge Hellcat, Mustang Shelby, Tacoma, \"Буханка\") должны остаться абсолютно без изменений.\n"
-                "   - Названия предметов (C4, кодлоки, плоскогубцы, топор, проволока, гвозди, шкаф, стойка для оружия) не должны меняться.\n"
-                "   - Все ссылки (URL) и контакты должны остаться нетронутыми.\n"
-                "2. СТРОГО СОХРАНЯЙ СТРУКТУРУ И ОФОРМЛЕНИЕ:\n"
-                "   - Сохраняй абсолютно все эмодзи (🦊, 🔥, 🎁, 1️⃣, 2️⃣, 3️⃣) ровно на их местах.\n"
-                "   - Сохраняй всю разметку Discord (жирный текст **, списки, переносы строк).\n"
-                "   - Количество строк, абзацев и списков должно остаться точно таким же. Не объединяй абзацы и не придумывай новые разделы.\n"
-                "3. ЧТО МОЖНО МЕНЯТЬ:\n"
-                "   - Меняй только общие связующие фразы, прилагательные, глаголы и приветствия на подходящие синонимы, чтобы сделать предложения уникальными.\n"
-                f"   - Стиль написания: {selected_tone}.\n"
-                f"   - Уникальный идентификатор сессии: {random_salt}.\n"
-                "4. Выведи ТОЛЬКО готовый перефразированный текст, без каких-либо кавычек в начале и конце, без вводных слов и пояснений.\n\n"
-                f"Оригинальный текст:\n{base_message}"
-            )
-            
-            response = model.generate_content(prompt)
-            text = response.text.strip()
-            
-            if text:
-                return add_random_invisible_chars(text)
-        except Exception as e:
-            print(f"[AI Error] Ошибка Gemini API: {e}. Пробуем бесплатные модели...")
-            return paraphrase_free(base_message)
-            
-    else:
-        # Default to free engine
-        res = paraphrase_free(base_message)
-        if "\u200b" not in res and "\u200c" not in res and "\u200d" not in res:
-            res = add_random_invisible_chars(res)
+                        tones = ["дружелюбный", "вежливый", "воодушевленный", "неформальный"]
+                        prompt = (
+                            "Перефразируй текст для Discord. СОХРАНИ IP 212.22.85.57:2302, DayZ, "
+                            "названия машин, предметов, все эмодзи и ссылки. Не меняй структуру. "
+                            f"Стиль: {random.choice(tones)}. Выдай ТОЛЬКО текст.\n\n"
+                            f"Текст:\n{base_message}"
+                        )
+
+                        response = model.generate_content(prompt)
+                        if response.text:
+                            print(f"[AI] Успешно через Gemini ({model_name})")
+                            return add_random_invisible_chars(response.text.strip())
+                    except Exception:
+                        continue
+            except Exception as e:
+                print(f"[AI Error] Сбой Gemini: {e}")
+
+    # 2. Second Attempt: Free LLM Providers (G4F)
+    print("[AI] Пробуем бесплатные нейросети (G4F)...")
+    res = paraphrase_free(base_message)
+
+    # Check if paraphrase_free actually changed the message or just returned base
+    if res.replace("\u200b", "").replace("\u200c", "").replace("\u200d", "") != base_message:
         return res
-        
+
+    # 3. Final Fallback: Manual Obfuscation if all LLMs fail
+    print("[AI Warning] Все LLM вернули ошибку. Применяем ручную уникализацию.")
     return add_random_invisible_chars(base_message)
 
 if __name__ == "__main__":

@@ -62,24 +62,35 @@ class ScrapeClient(discord.Client):
             return
             
         print(f"Сервер найден: {target_guild.name} (ID: {target_guild.id})")
-        print("Сбор участников начат (запрос чанков)...")
+
+        # Stealthy member collection: Subscribe to a channel first (Lazy Loading simulation)
+        for channel in target_guild.text_channels:
+            if channel.permissions_for(target_guild.me).read_messages:
+                print(f"Имитация просмотра канала: {channel.name}")
+                try:
+                    await channel.subscribe()
+                    await asyncio.sleep(2)
+                    break
+                except:
+                    continue
+
+        print("Запрашиваем участников через поиск (имитация действий человека)...")
         
-        try:
-            # Force chunking the guild to fetch all members with a timeout of 5 seconds
-            print("Запрашиваем участников у Discord (лимит ожидания 5 секунд)...")
-            await asyncio.wait_for(target_guild.chunk(), timeout=5.0)
-        except asyncio.TimeoutError:
-            print("Запрос чанков превысил таймаут. Используем мгновенно доступный кэш участников.")
-        except Exception as e:
-            print(f"Предупреждение при запросе участников: {e}. Работаем с текущим кэшем.")
-            
-        # If still empty or limited, try fetching
-        if len(target_guild.members) <= 1:
-            print("Список пуст, пробуем запросить участников напрямую...")
+        # Iterate over common characters to fill the member cache stealthily
+        search_queries = ['a', 'e', 'i', 'o', 'u', 'y', 't', 'n', 's', 'r']
+        import random
+
+        for q in search_queries:
             try:
-                await target_guild.query_members(limit=10000, cache=True)
+                print(f"Поиск участников на '{q}'...")
+                await target_guild.query_members(query=q, limit=100, cache=True)
+                # Wait between queries to look human
+                await asyncio.sleep(random.uniform(1.0, 2.5))
+                if len(target_guild.members) > 1000: # Stop if we have enough
+                    break
             except Exception as e:
-                print(f"Не удалось запросить участников через query_members: {e}")
+                print(f"Ошибка при поиске '{q}': {e}")
+                continue
 
         members = target_guild.members
         print(f"Всего обнаружено участников в кэше: {len(members)}")

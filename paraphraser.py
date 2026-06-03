@@ -15,6 +15,14 @@ def load_config():
         print(f"[Config Error] Failed to load config: {e}")
     return {}
 
+import random
+
+def add_random_invisible_chars(text: str) -> str:
+    """Adds random zero-width characters to the end of the text to ensure uniqueness."""
+    chars = ["\u200b", "\u200c", "\u200d"]
+    suffix = "".join(random.choice(chars) for _ in range(random.randint(3, 10)))
+    return text + suffix
+
 def paraphrase_free(base_message: str) -> str:
     """
     Attempts to paraphrase the base message using free GPT4Free (g4f) providers.
@@ -23,10 +31,9 @@ def paraphrase_free(base_message: str) -> str:
     try:
         import g4f
     except ImportError:
-        print("[AI Error] Библиотека g4f не установлена. Используем оригинал.")
-        return base_message
+        print("[AI Error] Библиотека g4f не установлена. Используем оригинал с невидимыми символами.")
+        return add_random_invisible_chars(base_message)
 
-    import random
     tones = [
         "дружелюбный и разговорный",
         "вежливый и профессиональный",
@@ -90,7 +97,7 @@ def paraphrase_free(base_message: str) -> str:
                     if cleaned_text.startswith("```") and cleaned_text.endswith("```"):
                         cleaned_text = cleaned_text[3:-3].strip()
                     print(f"[AI] Успешно перефразировано через {provider.__name__}!")
-                    return cleaned_text
+                    return add_random_invisible_chars(cleaned_text)
                     
             except Exception as e:
                 err_str = str(e).lower()
@@ -106,8 +113,8 @@ def paraphrase_free(base_message: str) -> str:
                     # Non-rate-limit error (e.g. 404 or connection issues), switch provider immediately
                     break
 
-    print("[AI Warning] Все бесплатные провайдеры вернули ошибку. Используем оригинальное сообщение.")
-    return base_message
+    print("[AI Warning] Все бесплатные провайдеры вернули ошибку. Используем оригинал с невидимыми символами.")
+    return add_random_invisible_chars(base_message)
 
 def paraphrase_message(base_message: str) -> str:
     """
@@ -180,16 +187,19 @@ def paraphrase_message(base_message: str) -> str:
             text = response.text.strip()
             
             if text:
-                return text
+                return add_random_invisible_chars(text)
         except Exception as e:
             print(f"[AI Error] Ошибка Gemini API: {e}. Пробуем бесплатные модели...")
             return paraphrase_free(base_message)
             
     else:
         # Default to free engine
-        return paraphrase_free(base_message)
+        res = paraphrase_free(base_message)
+        if "\u200b" not in res and "\u200c" not in res and "\u200d" not in res:
+            res = add_random_invisible_chars(res)
+        return res
         
-    return base_message
+    return add_random_invisible_chars(base_message)
 
 if __name__ == "__main__":
     # Test paraphrasing

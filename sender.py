@@ -23,11 +23,24 @@ class MultiTokenSender(discord.Client):
         self.token_id = token_info["id"]
         self.token_str = token_info["token"]
         self.username = token_info["username"]
+        self.proxy = token_info.get("proxy")
         self.friend_loop_task = None
         self.is_running = True
 
     async def on_ready(self):
         print(f"[Аккаунт {self.user}] Успешно авторизован и онлайн.")
+
+        # Set a random presence to look human
+        activities = [
+            discord.Game(name="DayZ"),
+            discord.Activity(type=discord.ActivityType.watching, name="YouTube"),
+            discord.Streaming(name="Survival", url="http://twitch.tv/directory"),
+            None
+        ]
+        activity = random.choice(activities)
+        status = random.choice([discord.Status.online, discord.Status.idle])
+        await self.change_presence(status=status, activity=activity)
+
         # Start the background tasks
         self.friend_loop_task = self.loop.create_task(self.friend_request_loop())
         # Check existing friends for pending messages
@@ -87,6 +100,12 @@ class MultiTokenSender(discord.Client):
                 # Keep lock acquired for 4 seconds to let the free provider breathe
                 await asyncio.sleep(4)
             
+            # Emulate typing
+            async with user.typing():
+                # typing speed: ~180 chars per minute
+                typing_duration = len(unique_message) / 3
+                await asyncio.sleep(min(typing_duration, 12)) # Max 12 seconds typing
+
             # Send DM
             await user.send(unique_message)
             print(f"[Аккаунт {self.user}] [УСПЕХ] Сообщение отправлено пользователю {user.name} (ID: {user.id})")
@@ -183,7 +202,9 @@ async def start_all_senders():
         # We define a startup wrapper to handle invalid tokens without crashing everything
         async def run_client(cl=client):
             try:
-                await cl.start(cl.token_str)
+                # Use proxy if available
+                proxy_url = cl.proxy if cl.proxy else None
+                await cl.start(cl.token_str, proxy=proxy_url)
             except discord.LoginFailure:
                 print(f"[Ошибка] Неверный токен для аккаунта ID {cl.token_id} (Username: {cl.username}). Токен помечен как недействительный.")
                 update_token_status(cl.token_id, "invalid")

@@ -57,15 +57,18 @@ def add_tokens_menu():
     print("\n=== ДОБАВЛЕНИЕ DISCORD ТОКЕНОВ ===")
     print("Вы можете ввести токен вручную или указать путь к файлу с токенами.")
     print("[1] Ввести токен вручную")
-    print("[2] Загрузить из файла tokens.txt (каждый токен с новой строки)")
+    print("[2] Загрузить из файла tokens.txt (каждый токен с новой строки или 'token|proxy')")
     print("[3] Вернуться назад")
     
     choice = input("\nВыберите действие: ").strip()
     
     if choice == "1":
         token = input("Введите Discord токен: ").strip()
+        proxy = input("Введите прокси (http://user:pass@ip:port) или оставьте пустым: ").strip()
+        if not proxy: proxy = None
+
         if token:
-            if add_token(token):
+            if add_token(token, proxy=proxy):
                 print("Токен успешно добавлен!")
             else:
                 print("Этот токен уже существует или произошла ошибка.")
@@ -87,7 +90,14 @@ def add_tokens_menu():
                 for line in f:
                     line = line.strip()
                     if line and not line.startswith("#"):
-                        if add_token(line):
+                        proxy = None
+                        token = line
+                        if "|" in line:
+                            parts = line.split("|")
+                            token = parts[0].strip()
+                            proxy = parts[1].strip()
+
+                        if add_token(token, proxy=proxy):
                             added += 1
             print(f"Успешно импортировано {added} токенов.")
         except Exception as e:
@@ -104,7 +114,8 @@ def run_scraper_menu():
     print(f"Доступно активных аккаунтов для сбора: {len(tokens)}")
     print("Выберите аккаунт для парсинга:")
     for idx, t in enumerate(tokens, 1):
-        print(f"[{idx}] {t['username'] or 'Без имени'} ({t['token'][:15]}...)")
+        proxy_info = f" | Прокси: {t['proxy']}" if t['proxy'] else " | Без прокси"
+        print(f"[{idx}] {t['username'] or 'Без имени'} ({t['token'][:15]}...){proxy_info}")
         
     try:
         token_choice = int(input("\nВыберите номер аккаунта: ").strip()) - 1

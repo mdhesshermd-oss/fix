@@ -14,10 +14,17 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         token TEXT UNIQUE NOT NULL,
         username TEXT,
+        proxy TEXT,
         status TEXT DEFAULT 'active',
         last_used TIMESTAMP
     )
     """)
+
+    # Migration: Add proxy column if it doesn't exist
+    try:
+        cursor.execute("ALTER TABLE tokens ADD COLUMN proxy TEXT")
+    except sqlite3.OperationalError:
+        pass # Column already exists
     
     # Create users table
     cursor.execute("""
@@ -38,14 +45,14 @@ def init_db():
     conn.commit()
     conn.close()
 
-def add_token(token: str, username: str = None) -> bool:
+def add_token(token: str, username: str = None, proxy: str = None) -> bool:
     """Adds a new discord user token."""
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     try:
         cursor.execute(
-            "INSERT OR IGNORE INTO tokens (token, username) VALUES (?, ?)",
-            (token, username)
+            "INSERT OR IGNORE INTO tokens (token, username, proxy) VALUES (?, ?, ?)",
+            (token, username, proxy)
         )
         conn.commit()
         return cursor.rowcount > 0
@@ -59,10 +66,10 @@ def get_active_tokens():
     """Retrieves list of active tokens."""
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    cursor.execute("SELECT id, token, username, status FROM tokens WHERE status = 'active'")
+    cursor.execute("SELECT id, token, username, proxy, status FROM tokens WHERE status = 'active'")
     rows = cursor.fetchall()
     conn.close()
-    return [{"id": r[0], "token": r[1], "username": r[2], "status": r[3]} for r in rows]
+    return [{"id": r[0], "token": r[1], "username": r[2], "proxy": r[3], "status": r[4]} for r in rows]
 
 def update_token_status(token_id: int, status: str):
     """Updates token status (e.g. invalid, rate_limited)."""

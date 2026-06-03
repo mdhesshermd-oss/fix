@@ -81,8 +81,29 @@ namespace DiscordMailerCS
                                 Console.ReadLine();
                             }
 
-                            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-                            var chatBox = wait.Until(d => d.FindElement(By.CssSelector("div[role='textbox']")));
+                            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+
+                            // Discord's UI can be tricky. We'll try multiple selectors and wait for the chat input to be interactable.
+                            IWebElement chatBox = null;
+                            string[] selectors = { "div[role='textbox']", "div[class*='markup']", "div[class*='textArea']" };
+
+                            foreach (var selector in selectors)
+                            {
+                                try
+                                {
+                                    chatBox = wait.Until(d => {
+                                        var el = d.FindElement(By.CssSelector(selector));
+                                        return (el.Displayed && el.Enabled) ? el : null;
+                                    });
+                                    if (chatBox != null) break;
+                                }
+                                catch { /* try next selector */ }
+                            }
+
+                            if (chatBox == null)
+                            {
+                                throw new Exception("Could not find Discord chat input. The user might have DMs disabled or the UI changed.");
+                            }
 
                             chatBox.Click();
                             foreach (char c in message)

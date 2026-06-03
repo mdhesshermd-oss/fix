@@ -150,7 +150,8 @@ def settings_menu():
         print(f"[3] Задержка отправки заявок в друзья: {config.get('delay_friend_request_min_seconds')} - {config.get('delay_friend_request_max_seconds')} сек.")
         print(f"[4] Задержка отправки сообщений после добавления: {config.get('delay_message_min_seconds')} - {config.get('delay_message_max_seconds')} сек.")
         print(f"[5] Движок ИИ для перефразирования: {'БЕСПЛАТНЫЙ (g4f)' if config.get('ai_engine', 'free') == 'free' else 'Google Gemini (нужен ключ)'}")
-        print("[6] Сохранить и вернуться в главное меню")
+        print(f"[6] Ключ 2Captcha (для авто-капчи): {'Установлен' if config.get('2captcha_api_key') else 'НЕ УСТАНОВЛЕН'}")
+        print("[7] Сохранить и вернуться в главное меню")
         
         choice = input("\nВыберите параметр для изменения: ").strip()
         
@@ -197,6 +198,10 @@ def settings_menu():
                 config["ai_engine"] = "gemini"
                 print("Установлен Google Gemini.")
         elif choice == "6":
+            key = input("Введите ваш 2Captcha API Key: ").strip()
+            if key:
+                config["2captcha_api_key"] = key
+        elif choice == "7":
             save_config(config)
             break
 

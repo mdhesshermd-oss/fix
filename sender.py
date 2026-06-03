@@ -15,13 +15,51 @@ from database import (
     DB_PATH
 )
 from paraphraser import paraphrase_message, load_config
+try:
+    from twocaptcha import TwoCaptcha
+except ImportError:
+    TwoCaptcha = None
 
 # Глобальная блокировка для AI запросов
 ai_lock = asyncio.Lock()
 
+async def discord_captcha_handler(captcha_data, client):
+    """
+    Автоматический обработчик капчи для discord.py-self.
+    captcha_data содержит sitekey и rqdata.
+    """
+    config = load_config()
+    api_key = config.get("2captcha_api_key")
+
+    if not api_key or not TwoCaptcha:
+        print("[CAPTCHA] API ключ 2Captcha не настроен или библиотека не установлена. Пропуск.")
+        return None
+
+    print(f"[CAPTCHA] Обнаружена капча для @{client.user}. Попытка решения через 2Captcha...")
+
+    try:
+        solver = TwoCaptcha(api_key)
+        # Решаем hCaptcha
+        result = await asyncio.to_thread(
+            solver.hcaptcha,
+            sitekey=captcha_data.sitekey,
+            url="https://discord.com/channels/@me",
+            rqdata=captcha_data.rqdata
+        )
+
+        if result and 'code' in result:
+            print("[CAPTCHA] Капча успешно решена!")
+            return result['code']
+    except Exception as e:
+        print(f"[CAPTCHA] Ошибка при решении капчи: {e}")
+
+    return None
+
 class MultiTokenSender(discord.Client):
     def __init__(self, token_info, *args, **kwargs):
-        # Прокси полностью удалены из инициализации
+        # Устанавливаем обработчик капчи
+        kwargs["captcha_handler"] = discord_captcha_handler
+
         super().__init__(*args, **kwargs)
 
         self.token_id = token_info["id"]

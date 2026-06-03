@@ -39,14 +39,26 @@ def check_for_captcha(template_path="captcha_icon.png"):
 def solve_interaction():
     """Пример автоматизированного действия для прохождения простой проверки."""
     # Логика зависит от типа окна Discord
-    # Здесь мы имитируем клик по центру экрана или в зону 'Я человек'
+    # Пытаемся найти кнопку "Я человек" (hCaptcha)
+    try:
+        # Ищем чекбокс или кнопку подтверждения
+        res = pyautogui.locateCenterOnScreen('hcaptcha_checkbox.png', confidence=0.7)
+        if res:
+            print("[AUTOMATION] Найдена кнопка hCaptcha! Нажимаем...")
+            human_click(res.x, res.y)
+            return True
+    except:
+        pass
+
+    # Если не нашли по картинке, кликаем в центр как fallback
     screen_width, screen_height = pyautogui.size()
     target_x = screen_width // 2
     target_y = screen_height // 2
 
-    print("[AUTOMATION] Попытка визуального взаимодействия...")
+    print("[AUTOMATION] Кнопка не найдена. Fallback: клик в центр...")
     human_click(target_x, target_y + 100) # Клик чуть ниже центра
     time.sleep(random.uniform(2.0, 4.0))
+    return False
 
 if __name__ == "__main__":
     print("Тестирование модуля автоматизации через 5 секунд...")

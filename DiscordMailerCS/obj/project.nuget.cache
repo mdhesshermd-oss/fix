@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5/6z1Z3ugJo=",
+  "success": true,
+  "projectFilePath": "/app/DiscordMailerCS/DiscordMailerCS.csproj",
+  "expectedPackageFiles": [
+    "/home/jules/.nuget/packages/selenium.webdriver/4.44.0/selenium.webdriver.4.44.0.nupkg.sha512",
+    "/home/jules/.nuget/packages/selenium.webdriver.chromedriver/149.0.7827.5400/selenium.webdriver.chromedriver.149.0.7827.5400.nupkg.sha512"
+  ],
+  "logs": []
+}

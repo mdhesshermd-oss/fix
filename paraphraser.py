@@ -65,10 +65,11 @@ def paraphrase_free(base_message: str) -> str:
         f"Оригинальный текст:\n{base_message}"
     )
 
-    # We prioritize PollinationsAI as it was tested successfully, and use others as fallback
+    # Rotate providers to avoid IP-based rate limits (like PollinationsAI 429)
     attempts = [
-        {"provider": g4f.Provider.PollinationsAI, "model": "openai"},
         {"provider": g4f.Provider.BlackboxPro, "model": "gpt-4o"},
+        {"provider": g4f.Provider.PollinationsAI, "model": "openai"},
+        {"provider": g4f.Provider.GigaChat, "model": "latest"},
     ]
 
     for attempt in attempts:

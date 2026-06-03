@@ -93,12 +93,12 @@ class MultiTokenSender(discord.Client):
             async with ai_lock:
                 print(f"[AI] Генерируем текст для {user.name}...")
                 unique_message = paraphrase_message(base_msg)
-                await asyncio.sleep(3) # Чтобы не спамить ИИ-провайдера
+                await asyncio.sleep(4) # Увеличили паузу для ИИ
             
-            # 3. Эмуляция печатания
+            # 3. Эмуляция печатания с джиттером
             async with user.typing():
-                # Имитируем разную скорость печати
-                typing_time = max(4, min(len(unique_message) / 4.5, 15))
+                # Имитируем разную скорость печати + рандомный джиттер
+                typing_time = max(5, min(len(unique_message) / 4.0, 15)) + random.uniform(1.0, 3.0)
                 await asyncio.sleep(typing_time)
 
             # 4. Отправка
@@ -108,6 +108,14 @@ class MultiTokenSender(discord.Client):
             update_friend_status(str(user.id), "accepted")
             update_message_status(str(user.id), "sent")
 
+        except discord.HTTPException as e:
+            err_msg = str(e).lower()
+            if "captcha" in err_msg or e.status == 403:
+                print(f"[КРИТ] Капча при отправке ЛС {user.name}. ПАУЗА 1 ЧАС.")
+                await asyncio.sleep(3600)
+            else:
+                print(f"[ОШИБКА] Сбой Discord API при ЛС {user.name}: {e}")
+            update_message_status(str(user.id), "failed")
         except Exception as e:
             print(f"[ОШИБКА] Не удалось отправить ЛС {user.name}: {e}")
             update_message_status(str(user.id), "failed")
@@ -135,10 +143,15 @@ class MultiTokenSender(discord.Client):
                 await user_obj.send_friend_request(location="Guild Member List")
                 print(f"[ЗАЯВКА] Успешно отправлена к {u['username']}.")
             except discord.HTTPException as e:
+                err_msg = str(e).lower()
                 if e.status == 429:
                     print(f"[LIMIT] Сработал Rate Limit Discord. Пауза 10 минут.")
                     update_friend_status(str(u['user_id']), "none")
                     await asyncio.sleep(600)
+                elif "captcha" in err_msg or e.status == 403 or "unauthorized" in err_msg:
+                    print(f"[КРИТ] Обнаружена капча или блокировка (403). ПАУЗА 1 ЧАС для безопасности.")
+                    update_friend_status(str(u['user_id']), "none")
+                    await asyncio.sleep(3600) # Safety stop for 1 hour
                 else:
                     print(f"[ОШИБКА] Ошибка API Discord: {e}")
                     update_friend_status(str(u['user_id']), "failed")

@@ -22,6 +22,10 @@ class MultiTokenSender(discord.Client):
         # Pass proxy to discord.Client via proxy keyword if supported
         proxy_url = token_info.get("proxy")
         if proxy_url:
+            # Normalize proxy: most proxies are http even if they proxy https traffic.
+            # Using https:// as the proxy protocol often causes SSL version errors.
+            if proxy_url.startswith("https://"):
+                proxy_url = proxy_url.replace("https://", "http://", 1)
             kwargs["proxy"] = proxy_url
 
         super().__init__(*args, **kwargs)

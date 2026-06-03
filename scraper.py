@@ -14,6 +14,11 @@ def extract_invite_code(link: str) -> str:
 
 class ScrapeClient(discord.Client):
     def __init__(self, target_input: str, *args, **kwargs):
+        # Normalize proxy if passed in kwargs
+        if "proxy" in kwargs and kwargs["proxy"]:
+            if kwargs["proxy"].startswith("https://"):
+                kwargs["proxy"] = kwargs["proxy"].replace("https://", "http://", 1)
+
         super().__init__(chunk_guilds_at_startup=True, *args, **kwargs)
         self.target_input = target_input
         self.scraped_users = []

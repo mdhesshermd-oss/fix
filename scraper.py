@@ -85,11 +85,10 @@ class ScrapeClient(discord.Client):
         for q in search_queries:
             try:
                 print(f"Поиск участников на '{q}'...")
+                # Removed the 1000 limit to scrape the entire server
                 await target_guild.query_members(query=q, limit=100, cache=True)
                 # Wait between queries to look human
                 await asyncio.sleep(random.uniform(1.0, 2.5))
-                if len(target_guild.members) > 1000: # Stop if we have enough
-                    break
             except Exception as e:
                 print(f"Ошибка при поиске '{q}': {e}")
                 continue

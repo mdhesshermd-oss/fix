@@ -76,9 +76,11 @@ class ScrapeClient(discord.Client):
 
         print("Запрашиваем участников через поиск (имитация действий человека)...")
         
-        # Iterate over common characters to fill the member cache stealthily
-        search_queries = ['a', 'e', 'i', 'o', 'u', 'y', 't', 'n', 's', 'r']
+        # Comprehensive search: letters, numbers, and common symbols
+        import string
         import random
+        search_queries = list(string.ascii_lowercase + string.digits + " ._!@#$%^&*()+-=")
+        random.shuffle(search_queries) # Shuffle to look less predictable
 
         for q in search_queries:
             try:

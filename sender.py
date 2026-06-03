@@ -84,34 +84,44 @@ class MultiTokenSender(discord.Client):
 
     async def send_paraphrased_dm_with_delay(self, user):
         """Paraphrases the base message and sends it to the user after a brief delay."""
+        print(f"[DEBUG] [Аккаунт {self.user}] Начало процесса отправки ЛС для {user.name} (ID: {user.id})")
         config = load_config()
         min_del = config.get("delay_message_min_seconds", 60)
         max_del = config.get("delay_message_max_seconds", 180)
         base_msg = config.get("base_message", "Привет!")
         
         delay = random.randint(min_del, max_del)
-        print(f"[Аккаунт {self.user}] Планирование отправки ЛС пользователю {user.name} через {delay} сек...")
+        print(f"[DEBUG] [Аккаунт {self.user}] Ожидание задержки перед отправкой: {delay} сек...")
         await asyncio.sleep(delay)
         
         try:
+            print(f"[DEBUG] [Аккаунт {self.user}] Запрос уникального сообщения у ИИ...")
             # Acquire global lock to query the AI sequentially, preventing rate-limiting on free providers
             async with ai_lock:
                 unique_message = paraphrase_message(base_msg)
                 # Keep lock acquired for 4 seconds to let the free provider breathe
                 await asyncio.sleep(4)
+            print(f"[DEBUG] [Аккаунт {self.user}] Сообщение сгенерировано (длина: {len(unique_message)})")
             
             # Emulate typing
+            print(f"[DEBUG] [Аккаунт {self.user}] Начало эмуляции набора текста...")
             async with user.typing():
                 # typing speed: ~180 chars per minute
                 typing_duration = len(unique_message) / 3
-                await asyncio.sleep(min(typing_duration, 12)) # Max 12 seconds typing
+                sleep_time = min(typing_duration, 12)
+                print(f"[DEBUG] [Аккаунт {self.user}] Печатаем {sleep_time:.1f} сек...")
+                await asyncio.sleep(sleep_time)
+            print(f"[DEBUG] [Аккаунт {self.user}] Эмуляция набора завершена.")
 
             # Send DM
+            print(f"[DEBUG] [Аккаунт {self.user}] Отправка сообщения в Discord API...")
             await user.send(unique_message)
             print(f"[Аккаунт {self.user}] [УСПЕХ] Сообщение отправлено пользователю {user.name} (ID: {user.id})")
             
+            print(f"[DEBUG] [Аккаунт {self.user}] Обновление статусов в БД...")
             update_friend_status(str(user.id), "accepted")
             update_message_status(str(user.id), "sent")
+            print(f"[DEBUG] [Аккаунт {self.user}] Статусы в БД обновлены.")
         except discord.Forbidden:
             print(f"[Аккаунт {self.user}] [ОШИБКА] Закрыто ЛС или заблокировано для {user.name} (ID: {user.id})")
             update_message_status(str(user.id), "failed")

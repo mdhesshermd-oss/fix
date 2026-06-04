@@ -1,0 +1,75 @@
+FrameWidgetClass root {
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ children {
+  PanelWidgetClass MainPanel {
+   color 0.1176 0.1176 0.1176 0.9412
+   position 0 0
+   size 0.8 0.8
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style DayZDefaultPanel
+   children {
+    TextWidgetClass Title {
+     position 0 0.02
+     size 1 0.05
+     halign center_ref
+     text "CENTRAL MARKET (AUCTION)"
+     font "gui/fonts/metron-bold22"
+     "text halign" center
+    }
+    TextListboxWidgetClass ItemList {
+     position 0.05 0.1
+     size 0.6 0.8
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "title visible" 1
+     colums "Item Name;Stock;Price"
+    }
+    PanelWidgetClass Controls {
+     position 0.68 0.1
+     size 0.28 0.8
+     children {
+      EditBoxWidgetClass PriceInput {
+       position 0 0.1
+       size 1 0.05
+       text "0"
+      }
+      EditBoxWidgetClass QuantityInput {
+       position 0 0.2
+       size 1 0.05
+       text "1"
+      }
+      ButtonWidgetClass BuyButton {
+       position 0 0.3
+       size 1 0.08
+       text "PLACE BUY ORDER"
+      }
+      ButtonWidgetClass SellButton {
+       position 0 0.4
+       size 1 0.08
+       text "PLACE SELL ORDER"
+      }
+      ButtonWidgetClass RefreshButton {
+       position 0 0.5
+       size 1 0.08
+       text "REFRESH LIST"
+      }
+     }
+    }
+   }
+  }
+ }
+}

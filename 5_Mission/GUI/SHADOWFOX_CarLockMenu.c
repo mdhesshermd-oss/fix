@@ -76,11 +76,11 @@ class SHADOWFOX_CarLockMenu extends UIScriptedMenu
         if (!player) return;
 
         if (m_Car.m_SF_OwnerId == player.m_SF_LowUid && m_Car.m_SF_Password == -1)
-            m_TextOutPut.SetText("Set Password (4 digits)");
+            m_TextOutPut.SetText("Set Password (6 digits)");
         else if (m_Car.m_SF_OwnerId == player.m_SF_LowUid)
-            m_TextOutPut.SetText("Change Password (4 digits)");
+            m_TextOutPut.SetText("Change Password (6 digits)");
         else
-            m_TextOutPut.SetText("Enter Password (4 digits)");
+            m_TextOutPut.SetText("Enter Password (6 digits)");
     }
 
     override bool OnClick(Widget w, int x, int y, int button)
@@ -107,7 +107,7 @@ class SHADOWFOX_CarLockMenu extends UIScriptedMenu
     void Append(string s)
     {
         string current = m_PasswordInput.GetText();
-        if (current.Length() < 4) m_PasswordInput.SetText(current + s);
+        if (current.Length() < 6) m_PasswordInput.SetText(current + s);
     }
 
     void DeleteLast()
@@ -120,7 +120,7 @@ class SHADOWFOX_CarLockMenu extends UIScriptedMenu
     {
         string pwd = m_PasswordInput.GetText();
         Print("[SHADOWFOX_CarLock] UI: Handling password input: " + pwd);
-        if (pwd.Length() != 4) { m_TextOutPut.SetText("Must be 4 digits!"); return; }
+        if (pwd.Length() != 6) { m_TextOutPut.SetText("Must be 6 digits!"); return; }
 
         int val = pwd.ToInt();
         GetRPCManager().SendRPC("SHADOWFOX_CarLock", "SHADOWFOX_CarLockPasswordRequest", new Param2<CarScript, int>(m_Car, val), true);

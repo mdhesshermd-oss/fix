@@ -17,7 +17,7 @@ class ActionSHADOWFOX_CarLockMenu : ActionInteractBase
 
     override string GetText()
     {
-        return "Car Lock Menu";
+        return "Manage Vehicle Lock";
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)

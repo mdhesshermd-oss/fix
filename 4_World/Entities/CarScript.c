@@ -8,20 +8,38 @@ modded class CarScript
     int m_SF_Password = -1;
     string m_SF_OwnerName = "";
     string m_SF_OwnerSteamId = "";
-    int m_SF_SoundToPlay = 0;
-
     void CarScript()
     {
         Print("[SHADOWFOX_CarLock] CarScript constructor called for " + GetDisplayName());
         RegisterNetSyncVariableBool("m_SF_IsLocked");
         RegisterNetSyncVariableInt("m_SF_OwnerId");
         RegisterNetSyncVariableInt("m_SF_Password");
-        RegisterNetSyncVariableInt("m_SF_SoundToPlay");
 
         if (GetGame().IsServer())
         {
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.SF_CarLockLogInit, 10, false);
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.SF_CheckAutoLock, 5000, true);
+        }
+    }
+
+    override void OnEngineStart()
+    {
+        super.OnEngineStart();
+        if (GetGame().IsServer())
+        {
+            Human driver = GetDriver();
+            PlayerBase player;
+            if (Class.CastTo(player, driver))
+            {
+                if (m_SF_OwnerId == -1)
+                {
+                    m_SF_OwnerId = player.m_SF_LowUid;
+                    m_SF_OwnerName = player.GetIdentity().GetName();
+                    m_SF_OwnerSteamId = player.GetIdentity().GetPlainId();
+                    SetSynchDirty();
+                    SHADOWFOX_CarLockNewLogger.Get().LogInfo("Vehicle claimed by " + m_SF_OwnerName + " (" + m_SF_OwnerSteamId + ") after starting engine.");
+                }
+            }
         }
     }
 
@@ -42,21 +60,6 @@ modded class CarScript
         }
     }
 
-    override void OnVariablesSynchronized()
-    {
-        super.OnVariablesSynchronized();
-        Print("[SHADOWFOX_CarLock] Variables Synchronized. Sound to play: " + m_SF_SoundToPlay);
-        if (m_SF_SoundToPlay == 1) PlaySF_LockSound();
-        else if (m_SF_SoundToPlay == 2) PlaySF_UnlockSound();
-        else if (m_SF_SoundToPlay == 3) PlaySF_AlarmSound();
-        m_SF_SoundToPlay = 0;
-    }
-
-    void SetSF_SoundToPlay(int id)
-    {
-        m_SF_SoundToPlay = id;
-        SetSynchDirty();
-    }
 
     void SetSF_CarLock(bool locked)
     {
@@ -97,7 +100,6 @@ modded class CarScript
         if (!owner)
         {
             SetSF_CarLock(true);
-            SetSF_SoundToPlay(1);
             return;
         }
 
@@ -105,26 +107,7 @@ modded class CarScript
         if (dist > config.AutoLockDistance)
         {
             SetSF_CarLock(true);
-            SetSF_SoundToPlay(1);
         }
-    }
-
-    void PlaySF_LockSound()
-    {
-        EffectSound sound = SEffectManager.PlaySound("SHADOWFOX_CarLock_SoundSet", GetPosition());
-        if (sound) sound.SetAutodestroy(true);
-    }
-
-    void PlaySF_UnlockSound()
-    {
-        EffectSound sound = SEffectManager.PlaySound("SHADOWFOX_CarUnlock_SoundSet", GetPosition());
-        if (sound) sound.SetAutodestroy(true);
-    }
-
-    void PlaySF_AlarmSound()
-    {
-        EffectSound sound = SEffectManager.PlaySound("SHADOWFOX_CarAlarm_SoundSet", GetPosition());
-        if (sound) sound.SetAutodestroy(true);
     }
 
     override void OnStoreSave(ParamsWriteContext ctx)

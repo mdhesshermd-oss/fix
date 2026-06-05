@@ -20,17 +20,19 @@ class SHADOWFOX_CarLockServer
             return;
         }
 
+        PlayerBase player = SHADOWFOX_CarLockHelpers.GetPlayerBySteamID(sender.GetPlainId());
         CarScript car = params.param1;
-        if (!car)
+        if (!car || !player)
         {
-            Print("[SHADOWFOX_CarLock] Server: Car object is null in request");
+            Print("[SHADOWFOX_CarLock] Server: Car or Player object is null in request");
             return;
         }
 
-        Print("[SHADOWFOX_CarLock] Server: Toggling lock for " + car.GetDisplayName() + " to " + params.param2);
-        car.SetSF_CarLock(params.param2);
-        if (params.param2) car.SetSF_SoundToPlay(1);
-        else car.SetSF_SoundToPlay(2);
+        if (SHADOWFOX_CarLockHelpers.CanPlayerUseLock(player, car))
+        {
+            Print("[SHADOWFOX_CarLock] Server: Toggling lock for " + car.GetDisplayName() + " to " + params.param2);
+            car.SetSF_CarLock(params.param2);
+        }
     }
 
     void SHADOWFOX_CarLockPasswordRequest(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target)
@@ -67,13 +69,6 @@ class SHADOWFOX_CarLockServer
                 car.SetSF_CarLock(true);
                 SHADOWFOX_CarLockNewLogger.Get().LogInfo("Password set: " + sender.GetName() + " for " + car.GetDisplayName());
 
-                EntityAI itemInHands = player.GetHumanInventory().GetEntityInHands();
-                if (itemInHands && itemInHands.IsKindOf("CodeLock"))
-                {
-                    Print("[SHADOWFOX_CarLock] Server: Deleting CodeLock from player hands");
-                    itemInHands.Delete();
-                }
-
                 rpc.Write(true);
                 rpc.Write(enteredPassword);
                 rpc.Write(car.m_SF_OwnerId);
@@ -86,13 +81,25 @@ class SHADOWFOX_CarLockServer
         }
         else if (isOwner)
         {
-            Print("[SHADOWFOX_CarLock] Server: Owner changing password");
-            car.m_SF_Password = enteredPassword;
-            SHADOWFOX_CarLockNewLogger.Get().LogInfo("Password changed: " + sender.GetName() + " for " + car.GetDisplayName());
-            rpc.Write(true);
-            rpc.Write(enteredPassword);
-            rpc.Write(car.m_SF_OwnerId);
-            rpc.Send(player, 78911, true, player.GetIdentity());
+            // Owner is entering the password to toggle the lock
+            if (enteredPassword == car.m_SF_Password)
+            {
+                Print("[SHADOWFOX_CarLock] Server: Owner verified password");
+                car.SetSF_CarLock(!car.m_SF_IsLocked);
+
+                rpc.Write(true);
+                rpc.Write(enteredPassword);
+                rpc.Write(car.m_SF_OwnerId);
+                rpc.Send(player, 78911, true, player.GetIdentity());
+            }
+            else
+            {
+                Print("[SHADOWFOX_CarLock] Server: Owner entered wrong password");
+                rpc.Write(false);
+                rpc.Write(-1);
+                rpc.Write(-1);
+                rpc.Send(player, 78911, true, player.GetIdentity());
+            }
         }
         else
         {
@@ -100,6 +107,9 @@ class SHADOWFOX_CarLockServer
             {
                 Print("[SHADOWFOX_CarLock] Server: Password verified for non-owner");
                 SHADOWFOX_CarLockNewLogger.Get().LogInfo("Password verified: " + sender.GetName() + " for " + car.GetDisplayName());
+
+                car.SetSF_CarLock(false); // Unlock the car upon successful password entry
+
                 rpc.Write(true);
                 rpc.Write(enteredPassword);
                 rpc.Write(car.m_SF_OwnerId);

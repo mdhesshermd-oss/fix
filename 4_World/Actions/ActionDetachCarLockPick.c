@@ -35,13 +35,23 @@ class ActionDetachCarLockPick : ActionContinuousBase
         CarScript car = SHADOWFOX_CarLockTargetHelper.GetTargetCar(target);
         if (car && car.m_SF_OwnerId != -1 && car.m_SF_IsLocked)
         {
-            auto config = GetSHADOWFOX_CarLockStandaloneConfig();
-            foreach (string tool : config.LockPickTools)
-            {
-                if (item.IsKindOf(tool)) return true;
-            }
+            if (item && item.IsKindOf("Lockpick")) return true;
         }
         return false;
+    }
+
+    override void OnStartServer(ActionData action_data)
+    {
+        super.OnStartServer(action_data);
+        CarScript car = SHADOWFOX_CarLockTargetHelper.GetTargetCar(action_data.m_Target);
+        if (car && car.m_SF_OwnerSteamId != "")
+        {
+            PlayerBase owner = SHADOWFOX_CarLockHelpers.GetPlayerBySteamID(car.m_SF_OwnerSteamId);
+            if (owner && owner.GetIdentity())
+            {
+                GetGame().RPCSingleParam(owner, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("Your vehicle is being lockpicked!"), true, owner.GetIdentity());
+            }
+        }
     }
 
     override void OnFinishProgressServer(ActionData action_data)
@@ -49,17 +59,26 @@ class ActionDetachCarLockPick : ActionContinuousBase
         CarScript car = SHADOWFOX_CarLockTargetHelper.GetTargetCar(action_data.m_Target);
         if (car)
         {
-            auto config = GetSHADOWFOX_CarLockStandaloneConfig();
-            if (Math.RandomInt(0, 100) < config.LockPickChance)
+            // 40% success chance
+            if (Math.RandomInt(0, 100) < 40)
             {
                 car.SetSF_CarLock(false);
                 SHADOWFOX_CarLockNewLogger.Get().LogInfo("Lock picked successfully on " + car.GetDisplayName() + " by " + action_data.m_Player.GetIdentity().GetName());
+
+                PlayerBase owner = SHADOWFOX_CarLockHelpers.GetPlayerBySteamID(car.m_SF_OwnerSteamId);
+                if (owner && owner.GetIdentity())
+                {
+                    GetGame().RPCSingleParam(owner, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("Your vehicle has been lockpicked!"), true, owner.GetIdentity());
+                }
             }
             else
             {
                 SHADOWFOX_CarLockNewLogger.Get().LogInfo("Lock pick failed on " + car.GetDisplayName() + " by " + action_data.m_Player.GetIdentity().GetName());
             }
-            action_data.m_MainItem.DecreaseHealth(20, false);
+
+            // Lockpick breaks after use
+            if (action_data.m_MainItem)
+                action_data.m_MainItem.Delete();
         }
     }
 };

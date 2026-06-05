@@ -47,43 +47,6 @@ class CfgMods
 	};
 };
 
-class CfgSoundSets
-{
-	class SHADOWFOX_CarAlarm_SoundSet
-	{
-		soundShaders[] = {"SHADOWFOX_CarAlarm_SoundShader"};
-	};
-	class SHADOWFOX_CarLock_SoundSet
-	{
-		soundShaders[] = {"SHADOWFOX_CarLock_SoundShader"};
-	};
-	class SHADOWFOX_CarUnlock_SoundSet
-	{
-		soundShaders[] = {"SHADOWFOX_CarUnlock_SoundShader"};
-	};
-};
-
-class CfgSoundShaders
-{
-	class SHADOWFOX_CarAlarm_SoundShader
-	{
-		samples[] = {{"SHADOWFOX_CarLock/Data/Sounds/caralarm", 1}};
-		volume = 1.0;
-		range = 150;
-	};
-	class SHADOWFOX_CarLock_SoundShader
-	{
-		samples[] = {{"SHADOWFOX_CarLock/Data/Sounds/carlock", 1}};
-		volume = 1.0;
-		range = 30;
-	};
-	class SHADOWFOX_CarUnlock_SoundShader
-	{
-		samples[] = {{"SHADOWFOX_CarLock/Data/Sounds/carunlock", 1}};
-		volume = 1.0;
-		range = 30;
-	};
-};
 
 class PrivacySettings
 {

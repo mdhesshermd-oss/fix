@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modded_inputs>
+    <input name="SHADOWFOX_CarLockToggle">
+        <default>
+            <key name="KC_U"/>
+        </default>
+    </input>
+</modded_inputs>

@@ -22,6 +22,13 @@ modded class CarScript
         }
     }
 
+    override void SetActions()
+    {
+        super.SetActions();
+        AddAction(ActionSHADOWFOX_CarLockMenu);
+        AddAction(ActionDetachCarLockPick);
+    }
+
     override void OnEngineStart()
     {
         super.OnEngineStart();

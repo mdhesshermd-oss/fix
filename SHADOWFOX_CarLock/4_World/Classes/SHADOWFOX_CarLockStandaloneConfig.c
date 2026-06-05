@@ -1,22 +1,18 @@
-#ifndef SHADOWFOX_CARLOCK_DISABLE
-#define SHADOWFOX_CARLOCK_DISABLE
+#ifndef SHADOWFOX_CARLOCK
+#define SHADOWFOX_CARLOCK
 
 class SHADOWFOX_CarLockStandaloneConfig
 {
-    int LockPickChance = 50;
+    int LockPickChance = 40;
     ref array<string> Admins;
-    ref array<string> LockPickTools;
     bool EnableAutoLock = true;
-    int AutoLockDistance = 100;
+    int AutoLockDistance = 20;
     bool EnablePasswordSharing = true;
     bool EnablePlayerDataTracking = true;
 
     void SHADOWFOX_CarLockStandaloneConfig()
     {
         Admins = new array<string>();
-        LockPickTools = new array<string>();
-        // Defaults
-        LockPickTools.Insert("Lockpick");
     }
 
     static ref SHADOWFOX_CarLockStandaloneConfig Load()

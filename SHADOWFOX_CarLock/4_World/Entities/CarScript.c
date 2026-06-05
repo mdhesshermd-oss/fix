@@ -1,5 +1,5 @@
-#ifndef SHADOWFOX_CARLOCK_DISABLE
-#define SHADOWFOX_CARLOCK_DISABLE
+#ifndef SHADOWFOX_CARLOCK
+#define SHADOWFOX_CARLOCK
 
 modded class CarScript
 {
@@ -8,16 +8,15 @@ modded class CarScript
     int m_SF_Password = -1;
     string m_SF_OwnerName = "";
     string m_SF_OwnerSteamId = "";
+
     void CarScript()
     {
-        Print("[SHADOWFOX_CarLock] CarScript constructor called for " + GetDisplayName());
         RegisterNetSyncVariableBool("m_SF_IsLocked");
         RegisterNetSyncVariableInt("m_SF_OwnerId");
-        RegisterNetSyncVariableInt("m_SF_Password");
+        // Removed password from NetSync for security
 
         if (GetGame().IsServer())
         {
-            GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.SF_CarLockLogInit, 10, false);
             GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this.SF_CheckAutoLock, 5000, true);
         }
     }
@@ -44,33 +43,13 @@ modded class CarScript
                     m_SF_OwnerName = player.GetIdentity().GetName();
                     m_SF_OwnerSteamId = player.GetIdentity().GetPlainId();
                     SetSynchDirty();
-                    SHADOWFOX_CarLockNewLogger.Get().LogInfo("Vehicle claimed by " + m_SF_OwnerName + " (" + m_SF_OwnerSteamId + ") after starting engine.");
                 }
             }
         }
     }
 
-    void SF_CarLockLogInit()
-    {
-        if (m_SF_OwnerId != -1 && m_SF_Password != -1)
-        {
-            Print("[SHADOWFOX_CarLock] CarLock Logic Initialized for vehicle: " + GetDisplayName());
-        }
-    }
-
-    override void EEDelete(EntityAI parent)
-    {
-        super.EEDelete(parent);
-        if (GetGame().IsServer() && m_SF_OwnerId != -1)
-        {
-            Print("[SHADOWFOX_CarLock] CarLock Deleted for vehicle: " + GetDisplayName());
-        }
-    }
-
-
     void SetSF_CarLock(bool locked)
     {
-        Print("[SHADOWFOX_CarLock] Setting lock state to: " + locked);
         m_SF_IsLocked = locked;
         if (GetGame().IsServer())
         {
@@ -86,10 +65,7 @@ modded class CarScript
 
     void UpdateSF_PlayerData()
     {
-        if (!GetGame().IsServer()) return;
-        auto config = GetSHADOWFOX_CarLockStandaloneConfig();
-        if (!config.EnablePlayerDataTracking || m_SF_OwnerSteamId == "") return;
-
+        if (!GetGame().IsServer() || m_SF_OwnerSteamId == "") return;
         SHADOWFOX_CarLockPlayerData data = SHADOWFOX_CarLockPlayerData.Get(m_SF_OwnerSteamId);
         if (data)
         {
@@ -99,9 +75,9 @@ modded class CarScript
 
     void SF_CheckAutoLock()
     {
-        if (!GetGame().IsServer()) return;
+        if (!GetGame().IsServer() || m_SF_IsLocked || m_SF_OwnerId == -1) return;
         auto config = GetSHADOWFOX_CarLockStandaloneConfig();
-        if (!config.EnableAutoLock || m_SF_IsLocked || m_SF_OwnerId == -1) return;
+        if (!config.EnableAutoLock) return;
 
         PlayerBase owner = SHADOWFOX_CarLockHelpers.GetPlayerBySteamID(m_SF_OwnerSteamId);
         if (!owner)
@@ -143,9 +119,6 @@ modded class CarScript
         }
         return true;
     }
-
-    string GetCarLockOwnerName() { return m_SF_OwnerName; }
-    string GetCarLockFullSteamID() { return m_SF_OwnerSteamId; }
 };
 
 #endif

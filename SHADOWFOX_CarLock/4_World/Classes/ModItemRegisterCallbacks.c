@@ -1,5 +1,5 @@
-#ifndef SHADOWFOX_CARLOCK_DISABLE
-#define SHADOWFOX_CARLOCK_DISABLE
+#ifndef SHADOWFOX_CARLOCK
+#define SHADOWFOX_CARLOCK
 
 modded class ModItemRegisterCallbacks
 {

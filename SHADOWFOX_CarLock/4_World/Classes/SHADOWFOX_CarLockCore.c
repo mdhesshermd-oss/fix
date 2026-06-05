@@ -1,5 +1,5 @@
-#ifndef SHADOWFOX_CARLOCK_DISABLE
-#define SHADOWFOX_CARLOCK_DISABLE
+#ifndef SHADOWFOX_CARLOCK
+#define SHADOWFOX_CARLOCK
 
 class SHADOWFOX_CarLockCore
 {
@@ -53,20 +53,6 @@ class SHADOWFOX_CarLockCore
             GetRPCManager().AddRPC("SHADOWFOX_CarLock", "SHADOWFOX_CarLockRequest", m_CarLockServer, SingleplayerExecutionType.Both);
             GetRPCManager().AddRPC("SHADOWFOX_CarLock", "SHADOWFOX_CarLockPasswordRequest", m_CarLockServer, SingleplayerExecutionType.Both);
         }
-    }
-
-    static void LogVehicleAction(string actionType, CarScript car, PlayerBase player)
-    {
-        if (!car || !player) return;
-        string name = "Unknown";
-        string uid = "Unknown";
-        if (player.GetIdentity())
-        {
-            name = player.GetIdentity().GetName();
-            uid = player.GetIdentity().GetPlainId();
-        }
-        string msg = actionType + " | " + car.GetDisplayName() + " | Player: " + name + " (" + uid + ") | Pos: " + car.GetPosition().ToString();
-        SHADOWFOX_CarLockNewLogger.Get().Log(msg);
     }
 };
 

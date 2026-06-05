@@ -47,6 +47,17 @@ class CfgMods
 	};
 };
 
+class CfgInputs
+{
+	class UASHADOWFOX_CarLockToggle
+	{
+		name = "SHADOWFOX CarLock Toggle";
+		description = "Toggle Vehicle Lock";
+		visible = 1;
+		container = "PrivacySettings";
+		slot = "SHADOWFOX_CarLock";
+	};
+};
 
 class PrivacySettings
 {

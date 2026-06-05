@@ -1,5 +1,5 @@
-#ifndef SHADOWFOX_CARLOCK_DISABLE
-#define SHADOWFOX_CARLOCK_DISABLE
+#ifndef SHADOWFOX_CARLOCK
+#define SHADOWFOX_CARLOCK
 
 modded class MissionGameplay
 {
@@ -13,7 +13,8 @@ modded class MissionGameplay
     {
         super.OnUpdate(timeslice);
 
-        if (GetUApi().GetInputByName("SHADOWFOX_CarLockToggle").LocalPress())
+        UAInput input = GetUApi().GetInputByName("UASHADOWFOX_CarLockToggle");
+        if (input && input.LocalPress())
         {
             TryToggleVehicleLock();
         }
@@ -25,7 +26,6 @@ modded class MissionGameplay
         if (!player) return;
 
         CarScript car;
-        // Search for nearby vehicle
         array<Object> objects = new array<Object>;
         GetGame().GetObjectsAtPosition3D(player.GetPosition(), 5.0, objects, null);
 
